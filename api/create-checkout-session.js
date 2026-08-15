@@ -94,27 +94,18 @@ export default async function handler(req, res) {
 
     const appUrl = process.env.APP_URL;
 
-const session = await stripe.checkout.sessions.create({
-  mode: 'subscription',
-  customer: customerId,
-  line_items: [
-    {
-      price: priceId,
-      quantity: 1,
-      currency: 'eur'
-    }
-  ],
-  success_url: `${appUrl}/?checkout=success`,
-  cancel_url: `${appUrl}/?checkout=cancelled`,
-  client_reference_id: user.id,
-  subscription_data: {
-    metadata: {
-      supabase_user_id: user.id,
-      plan
-    }
-  },
-  allow_promotion_codes: true
-});
+    const session = await stripe.checkout.sessions.create({
+      mode: 'subscription',
+      customer: customerId,
+      line_items: [{ price: priceId, quantity: 1 }],
+      success_url: `${appUrl}/?checkout=success`,
+      cancel_url: `${appUrl}/?checkout=cancelled`,
+      client_reference_id: user.id,
+      subscription_data: {
+        metadata: { supabase_user_id: user.id, plan },
+      },
+      allow_promotion_codes: true,
+    });
 
     return res.status(200).json({ url: session.url });
   } catch (err) {
