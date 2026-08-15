@@ -113,7 +113,7 @@ const session = await stripe.checkout.sessions.create({
       plan
     }
   },
-  allow_promotion_codes: false
+  allow_promotion_codes: true
 });
 
     return res.status(200).json({ url: session.url });
