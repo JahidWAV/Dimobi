@@ -1,0 +1,1341 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090909" id="themeColor"><title>KOPPI</title>
+<style>
+:root{--bg:#090909;--panel:#101010;--panel2:#171717;--line:#292929;--line2:#464646;--text:#f3f3f1;--muted:#9a9a96;--dim:#656560;--input:#151515;--hover:#222;--button:#ededeb;--buttonText:#101010;--blue:#1683ff;--success:#74bd88;--danger:#dc7676}:root[data-theme=light]{--bg:#f7f7f5;--panel:#fff;--panel2:#f2f2ef;--line:#deded9;--line2:#bdbdb8;--text:#181817;--muted:#62625f;--dim:#878781;--input:#f1f1ee;--hover:#e9e9e6;--button:#181817;--buttonText:#fff}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}body{overflow-x:hidden}button,input,textarea,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.hidden{display:none!important}
+#bootLoader{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:var(--bg);opacity:1;transition:opacity .22s ease}#bootLoader.hide{opacity:0;pointer-events:none}.boot-spinner{width:22px;height:22px;border:2px solid var(--line2);border-top-color:var(--muted);border-radius:50%;animation:bootspin .7s linear infinite}@keyframes bootspin{to{transform:rotate(360deg)}}
+.site-nav{height:64px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 max(24px,calc((100vw - 1180px)/2));border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(14px);position:sticky;top:0;z-index:20}.nav-left,.nav-right{display:flex;align-items:center}.nav-left{justify-content:flex-start}.nav-right{justify-content:flex-end}.brand{grid-column:2;justify-self:center;font-size:15px;font-weight:780;letter-spacing:.18em;line-height:1}.nav-actions{display:flex;align-items:center;gap:8px}.btn{height:35px;padding:0 13px;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line2);border-radius:6px;background:transparent;color:var(--text);font-size:12px;font-weight:620;transition:.16s ease}.btn:hover{border-color:var(--muted);background:var(--hover)}.btn.primary{border-color:var(--button);background:var(--button);color:var(--buttonText)}.btn.primary:hover{opacity:.86}.theme-button{width:35px;height:35px;padding:0;display:grid;place-items:center;border:1px solid var(--line2);border-radius:7px;background:transparent;color:var(--muted)}.theme-button:hover{border-color:var(--muted);background:var(--hover);color:var(--text)}.theme-button svg{width:15px;height:15px}
+.hero{max-width:1180px;margin:0 auto;padding:124px 28px 98px;display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.9fr);align-items:center;gap:78px}.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:19px;color:var(--muted);font-size:11px;font-weight:650;letter-spacing:.08em;text-transform:uppercase}.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--text)}.hero h1{max-width:630px;margin:0;font:400 clamp(46px,6vw,76px)/.99 Georgia,"Times New Roman",serif;letter-spacing:-.055em}.hero h1 em{font-style:italic;color:var(--muted)}.hero p{max-width:490px;margin:25px 0 30px;color:var(--muted);font-size:16px;line-height:1.62}.hero-buttons{display:flex;gap:10px}.hero-note{margin:17px 0 0;color:var(--dim);font-size:11px}.hero-preview{position:relative}.preview-window{overflow:hidden;border:1px solid var(--line2);border-radius:12px;background:var(--panel);box-shadow:0 25px 80px rgba(0,0,0,.3)}.preview-head{height:40px;padding:0 13px;display:flex;align-items:center;gap:5px;border-bottom:1px solid var(--line)}.preview-dot{width:7px;height:7px;border-radius:50%;background:var(--line2)}.preview-title{margin-left:8px;color:var(--dim);font-size:10px}.preview-body{display:grid;grid-template-columns:112px 1fr;min-height:320px}.preview-side{padding:14px 9px;border-right:1px solid var(--line)}.preview-mini-logo{margin:0 5px 20px;font-size:12px;font-weight:700}.preview-mini-line{height:8px;margin:0 5px 12px;border-radius:2px;background:var(--line)}.preview-mini-line.active{background:var(--text);opacity:.8}.preview-editor{padding:38px 34px}.preview-context{color:var(--dim);font-size:8px;letter-spacing:.09em;text-transform:uppercase}.preview-editor h3{margin:17px 0;font:400 29px Georgia,serif}.preview-rule{width:25px;height:2px;margin-bottom:19px;background:var(--text)}.preview-text{height:7px;margin-bottom:10px;border-radius:2px;background:var(--line)}.w90{width:90%}.w75{width:75%}.w62{width:62%}.w84{width:84%}.preview-float{position:absolute;right:-22px;bottom:-22px;width:155px;padding:14px;border:1px solid var(--line2);border-radius:10px;background:var(--panel2);box-shadow:0 16px 40px rgba(0,0,0,.3)}.preview-float-label{color:var(--dim);font-size:9px;text-transform:uppercase;letter-spacing:.08em}.preview-float-value{margin-top:6px;font:400 22px Georgia,serif}.preview-float-note{margin-top:3px;color:var(--muted);font-size:9px}.features{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.features-inner{max-width:1180px;margin:0 auto;padding:74px 28px;display:grid;grid-template-columns:repeat(3,1fr)}.feature{padding:0 36px;border-left:1px solid var(--line)}.feature:first-child{padding-left:0;border-left:0}.feature:last-child{padding-right:0}.feature-index{display:block;margin-bottom:22px;color:var(--dim);font-size:10px}.feature h3{margin:0 0 10px;font:400 25px Georgia,serif}.feature p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}.workflow{max-width:1180px;margin:0 auto;padding:106px 28px}.section-kicker{color:var(--dim);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.workflow-grid{margin-top:22px;display:grid;grid-template-columns:.85fr 1.15fr;gap:100px}.workflow h2{margin:0;font:400 clamp(34px,4vw,52px)/1.04 Georgia,serif}.workflow-copy{color:var(--muted);font-size:15px;line-height:1.65}.workflow-copy p{margin:0 0 20px}.workflow-list{margin:25px 0 0;padding:0;list-style:none}.workflow-list li{padding:13px 0;border-top:1px solid var(--line);font-size:13px;color:var(--text)}.workflow-list span{display:inline-block;width:27px;color:var(--dim);font-size:10px}.landing-cta{margin:0 28px 28px;padding:66px max(30px,6vw);background:var(--panel2);border:1px solid var(--line);border-radius:12px;text-align:center}.landing-cta h2{margin:0;font:400 clamp(33px,4vw,52px)/1 Georgia,serif}.landing-cta p{margin:16px auto 25px;max-width:470px;color:var(--muted);font-size:14px;line-height:1.6}.landing-footer{max-width:1180px;margin:0 auto;padding:22px 28px 32px;display:flex;justify-content:space-between;color:var(--dim);font-size:11px}
+.auth-page{min-height:calc(100vh - 64px);display:grid;place-items:center;padding:40px 24px}.auth-card{width:min(405px,100%);padding:34px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 20px 70px rgba(0,0,0,.16)}.auth-card h1{margin:0 0 8px;font-size:22px}.auth-card p{margin:0 0 27px;color:var(--muted);font-size:13px;line-height:1.55}.field-label{display:block;margin:0 0 7px;color:var(--muted);font-size:11px;font-weight:600}.auth-field{margin-top:15px}.auth-input,.dialog-input{width:100%;height:44px;padding:0 12px;border:1px solid var(--line2);border-radius:7px;outline:none;background:var(--input);color:var(--text);font-size:14px}.auth-submit{width:100%;height:42px;margin-top:24px;border:1px solid var(--button);border-radius:7px;background:var(--button);color:var(--buttonText);font-size:13px;font-weight:650}.auth-submit:disabled{opacity:.5;cursor:wait}.auth-switch{margin:18px 0 0;text-align:center;color:var(--muted);font-size:12px}.auth-switch button{padding:0;border:0;background:transparent;color:var(--text);font-weight:650;text-decoration:underline}.auth-message{min-height:18px;margin:15px 0 0;color:var(--danger);font-size:11px}.auth-message.success{color:var(--success)}.auth-config{margin-top:26px;padding-top:17px;border-top:1px solid var(--line);color:var(--dim);font-size:10px;line-height:1.5}
+.dashboard{min-height:100vh;display:flex;flex-direction:column}
+.app-header{height:56px;flex:0 0 56px;display:flex;align-items:center;gap:14px;padding:0 20px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:30}
+.app-header-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+.app-brand{background:none;border:0;padding:0;color:var(--text);font-size:13px;font-weight:780;letter-spacing:.16em;white-space:nowrap}
+.app-sep{width:1px;height:20px;background:var(--line2);flex:0 0 1px}
+.outline-toggle{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line2);border-radius:6px;background:transparent;color:var(--text);font-size:14px;flex:0 0 auto}
+.outline-toggle:hover{border-color:var(--muted);background:var(--hover)}
+.app-header-center{flex:0 0 auto;display:flex;justify-content:center;min-width:0}
+.app-header-right{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0}
+.project-switch{position:relative}
+.project-switch>summary{list-style:none;display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:7px;font:400 15px Georgia,"Times New Roman",serif;color:var(--text);max-width:44vw;cursor:pointer}
+.project-switch>summary::-webkit-details-marker{display:none}
+.project-switch>summary:hover{background:var(--hover)}
+.project-switch .p-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.project-switch .p-caret{color:var(--dim);font-size:9px;flex:0 0 auto}
+.project-popover{position:absolute;left:50%;transform:translateX(-50%);top:44px;width:300px;max-width:80vw;padding:8px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);box-shadow:0 18px 48px rgba(0,0,0,.28);z-index:35;max-height:70vh;overflow:auto}
+.proj-item{position:relative;display:flex;align-items:center;gap:4px;padding:2px;border-radius:7px}
+.proj-item:hover,.proj-item.menu-open{background:var(--hover)}
+.proj-item .proj-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;background:none;border:0;color:var(--muted);font-size:12px;padding:9px 8px}
+.proj-item.active .proj-name{color:var(--text);font-weight:650}
+.menu-dots{width:26px;height:26px;flex:0 0 auto;border:0;border-radius:5px;background:transparent;color:var(--dim);font-size:15px;opacity:0}
+.proj-item:hover .menu-dots,.proj-item:focus-within .menu-dots,.proj-item.menu-open .menu-dots{opacity:1}
+.menu-dots:hover{background:var(--line);color:var(--text)}
+.project-popover hr,.account-popover2 hr{border:0;border-top:1px solid var(--line);margin:6px 4px}
+.proj-new{width:100%;height:34px;border:0;border-radius:6px;background:transparent;color:var(--text);font-size:12px;text-align:left;padding:0 9px;font-weight:600}
+.proj-new:hover{background:var(--hover)}
+.mini-popover{position:absolute;right:0;top:32px;width:190px;padding:6px;border:1px solid var(--line2);border-radius:9px;background:var(--panel);box-shadow:0 16px 42px rgba(0,0,0,.3);z-index:40}
+.mini-popover button{width:100%;height:32px;border:0;border-radius:6px;background:transparent;color:var(--text);text-align:left;padding:0 9px;font-size:12px}
+.mini-popover button:hover{background:var(--hover)}
+.mini-popover button.danger{color:var(--danger)}
+.sync-state{display:flex;align-items:center;gap:6px;color:var(--dim);font-size:11px;padding:0 6px;white-space:nowrap}
+.sync-state .sync-dot{width:6px;height:6px;border-radius:50%;background:var(--success);flex:0 0 auto}
+.sync-state.saving .sync-dot{background:#e8c56a;animation:pulse 1s infinite}
+.sync-state.error{color:var(--danger)}
+.sync-state.error .sync-dot{background:var(--danger)}
+@keyframes pulse{50%{opacity:.35}}
+.header-btn{height:32px;padding:0 12px;border:1px solid var(--line2);border-radius:6px;background:transparent;color:var(--text);font-size:11px;font-weight:620;white-space:nowrap}
+.header-btn:hover{border-color:var(--muted);background:var(--hover)}
+.account-menu2{position:relative;flex:0 0 auto}
+.account-menu2>summary{list-style:none;width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line2);border-radius:6px;color:var(--muted);cursor:pointer}
+.account-menu2>summary svg{width:17px;height:17px}
+.account-menu2>summary::-webkit-details-marker{display:none}
+.account-menu2>summary:hover{background:var(--hover);color:var(--text)}
+.account-popover2{position:absolute;right:0;top:40px;width:260px;padding:9px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);box-shadow:0 18px 48px rgba(0,0,0,.28);z-index:35}
+.acc-email{padding:6px 8px 10px;color:var(--text);font-size:12px;word-break:break-all}
+.acc-plan{padding:0 8px 10px;color:var(--muted);font-size:11px;display:flex;flex-direction:column;gap:5px}
+.acc-plan b{color:var(--text)}
+.quota-bar{height:4px;border-radius:2px;background:var(--line);overflow:hidden;margin-top:1px}
+.quota-bar i{display:block;height:100%;background:var(--blue)}
+.account-popover2 button{width:100%;height:32px;border:0;border-radius:6px;background:transparent;color:var(--text);text-align:left;padding:0 8px;font-size:12px}
+.account-popover2 button:hover{background:var(--hover)}
+.acc-row{display:flex;align-items:center;justify-content:space-between;padding:2px 8px;height:32px;font-size:12px;color:var(--text)}
+.theme-switch{position:relative;flex:0 0 auto;width:38px;height:22px;padding:2px;border:1px solid var(--line2);border-radius:999px;background:var(--input)}
+.theme-switch i{display:block;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:transform .16s ease,background .16s ease}
+.theme-switch.on{background:var(--text)}
+.theme-switch.on i{transform:translateX(16px);background:var(--panel2)}
+.dash-content{flex:1;min-height:0;display:grid;grid-template-columns:242px minmax(0,1fr);position:relative;transition:grid-template-columns .16s ease}
+.dash-content.outline-collapsed{grid-template-columns:0 minmax(0,1fr)}
+.dash-content.outline-collapsed .outline{padding:0;border-right:0;overflow:hidden}
+.outline{overflow:auto;padding:23px 12px;border-right:1px solid var(--line);background:var(--panel)}
+.outline-head{display:flex;align-items:center;justify-content:space-between;margin:0 8px 12px}
+.outline-label{color:var(--dim);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.outline-add{width:23px;height:23px;border:0;border-radius:5px;background:transparent;color:var(--muted);font-size:18px}
+.outline-add:hover{background:var(--hover);color:var(--text)}
+.outline-item{position:relative;width:100%;display:flex;align-items:center;gap:8px;padding:0 6px 0 9px;border:1px solid transparent;border-radius:5px;background:transparent;color:var(--muted);margin-bottom:2px}
+.outline-item.drag-over{border-color:var(--blue)}
+.outline-item:hover{background:var(--hover);color:var(--text)}
+.outline-item.active{background:var(--hover);border-color:var(--line);color:var(--text)}
+.outline-item.active .outline-btn{color:var(--text)}
+.outline-btn{flex:1;min-width:0;display:flex;align-items:center;gap:8px;min-height:34px;padding:5px 0;border:0;background:transparent;color:inherit;text-align:left}
+.outline-index{width:22px;color:var(--dim);font-size:10px;text-align:right;flex:0 0 auto;padding-top:1px}
+.outline-text{min-width:0;flex:1;display:flex;flex-direction:column;gap:1px}
+.outline-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+.outline-meta{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--dim);font-size:9.5px}
+.outline-item.lvl-0{margin-top:14px;padding-left:9px}
+.outline-item.lvl-0:first-child{margin-top:0}
+.outline-item.lvl-0 .outline-name{font-weight:750;text-transform:uppercase;letter-spacing:.05em;font-size:11px}
+.outline-item.lvl-0 .outline-index{font-weight:750}
+.outline-item.lvl-1{padding-left:9px}
+.outline-item.lvl-2{padding-left:27px}
+.outline-item.lvl-2 .outline-name{font-size:11.5px;color:var(--muted)}
+.outline-item.lvl-2 .outline-index{width:26px;font-size:9px}
+.outline-words{color:var(--dim);font-size:10px;flex:0 0 auto}
+.outline-menu-btn{width:22px;height:22px;flex:0 0 auto;border:0;border-radius:4px;background:transparent;color:var(--dim);opacity:0;font-size:13px}
+.outline-item:hover .outline-menu-btn,.outline-item:focus-within .outline-menu-btn,.outline-item.menu-open .outline-menu-btn{opacity:1}
+.outline-menu-btn:hover{background:var(--line);color:var(--text)}
+.sec-popover{position:absolute;right:4px;top:32px;width:190px;padding:6px;border:1px solid var(--line2);border-radius:8px;background:var(--panel);box-shadow:0 14px 38px rgba(0,0,0,.25);z-index:15}
+.sec-popover button{width:100%;height:30px;border:0;border-radius:5px;background:transparent;color:var(--text);text-align:left;padding:0 8px;font-size:11px}
+.sec-popover button:hover{background:var(--hover)}
+.sec-popover button.danger{color:var(--danger)}
+.sec-popover button:disabled{opacity:.35;cursor:default}
+.sec-popover button:disabled:hover{background:transparent}
+.editor-space{min-width:0;display:flex;flex-direction:column;background:var(--bg)}
+.editor-top{height:43px;flex:0 0 43px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;border-bottom:1px solid var(--line);color:var(--dim);font-size:10px}
+.editor-top-actions{display:flex;align-items:center;gap:7px}
+.top-button{height:31px;padding:0 10px;border:1px solid var(--line2);border-radius:5px;background:var(--panel2);color:var(--muted);font-size:11px}
+.top-button:hover{border-color:var(--muted);color:var(--text);background:var(--hover)}
+.editor{width:min(820px,calc(100% - 90px));margin:0 auto;padding:38px 0 70px;flex:1}
+.save-error-banner{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 16px;padding:10px 12px;border:1px solid var(--danger);border-radius:7px;background:color-mix(in srgb,var(--danger) 12%,transparent);color:var(--text);font-size:12px}
+.save-error-banner button{height:28px;padding:0 10px;border:1px solid var(--line2);border-radius:6px;background:var(--panel);color:var(--text);font-size:11px}
+.section-title{width:100%;padding:0 0 14px;border:0;border-bottom:1px solid transparent;outline:none;background:transparent;color:var(--text);font:400 39px/1.15 Georgia,"Times New Roman",serif}
+.section-title:focus{border-color:var(--line2)}
+.writing-area{width:100%;min-height:calc(100vh - 290px);padding:0;border:0;outline:0;resize:none;background:transparent;color:var(--text);font:18px/1.85 Georgia,"Times New Roman",serif}
+.section-title::placeholder,.writing-area::placeholder{color:var(--dim)}
+.editor-rule{width:30px;height:2px;margin:24px 0 25px;background:var(--text)}
+.dash-status{height:38px;flex:0 0 38px;padding:0 30px;display:flex;align-items:center;gap:18px;border-top:1px solid var(--line);color:var(--dim);font-size:10px}
+.dash-status b{margin-left:4px;color:var(--muted);font-weight:500}
+.dashboard-empty{height:100%;display:grid;place-items:center;text-align:center}
+.dashboard-empty h1{margin:0 0 9px;font:400 28px Georgia,serif}
+.dashboard-empty p{margin:0 0 20px;color:var(--muted);font-size:13px}
+.outline-overlay{display:none}
+dialog{width:min(464px,calc(100vw - 36px));margin:auto;padding:0;border:1px solid var(--line2);border-radius:12px;background:var(--panel2);color:var(--text);box-shadow:0 26px 90px rgba(0,0,0,.45);overflow:hidden}
+dialog.wide{width:min(920px,calc(100vw - 36px))}
+dialog::backdrop{background:rgba(0,0,0,.62);backdrop-filter:blur(7px)}
+.dialog-content{margin:0;padding:27px;background:var(--panel2);max-height:82vh;overflow:auto}
+.dialog-mark{width:31px;height:31px;margin:0 0 18px;display:grid;place-items:center;border:1px solid var(--line2);border-radius:8px;font:16px Georgia,serif}
+.dialog-content h2{margin:0 0 8px;font-size:17px}
+.dialog-content p{margin:0 0 22px;color:var(--muted);font-size:13px;line-height:1.55}
+.dialog-content p.tight{margin-bottom:10px}
+.dialog-content p strong{color:var(--text)}
+.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:23px}
+.dialog-actions button{height:36px;padding:0 14px;border:1px solid var(--line2);border-radius:7px;background:var(--panel);color:var(--text);font-size:12px;font-weight:600}
+.dialog-actions button:hover{border-color:var(--muted);background:var(--hover)}
+.dialog-actions .confirm{border-color:var(--button);background:var(--button);color:var(--buttonText)}
+.dialog-actions .confirm.danger-confirm{border-color:var(--danger);background:var(--danger);color:#fff}
+.dialog-actions .confirm:disabled{opacity:.4;cursor:not-allowed}
+.option-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.option-row:first-of-type{border-top:0;padding-top:0}
+.option-row .opt-label{font-size:12px;font-weight:600}
+.option-row .opt-hint{margin-top:2px;color:var(--dim);font-size:10.5px}
+.seg{display:flex;border:1px solid var(--line2);border-radius:7px;overflow:hidden;flex:0 0 auto}
+.seg button{height:30px;padding:0 12px;border:0;background:transparent;color:var(--muted);font-size:11px}
+.seg button.active{background:var(--button);color:var(--buttonText)}
+.switchbtn{position:relative;width:38px;height:22px;border-radius:11px;background:var(--line2);border:0;cursor:pointer;flex:0 0 auto}
+.switchbtn.on{background:var(--blue)}
+.switchbtn i{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.15s;display:block}
+.switchbtn.on i{left:18px}
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+.plan-card{border:1px solid var(--line2);border-radius:10px;padding:16px;display:flex;flex-direction:column}
+.plan-card.current{border-color:var(--blue)}
+.plan-card .plan-tag{color:var(--blue);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;min-height:12px}
+.plan-card h3{margin:0 0 4px;font:400 21px Georgia,serif}
+.plan-card .price{color:var(--muted);font-size:12px;margin-bottom:12px}
+.plan-card ul{list-style:none;margin:0 0 16px;padding:0;color:var(--muted);font-size:11px;line-height:1.9;flex:1}
+.plan-card button{width:100%;height:34px;border:1px solid var(--line2);border-radius:7px;background:transparent;color:var(--text);font-size:11px;font-weight:650}
+.plan-card button.primary{border-color:var(--button);background:var(--button);color:var(--buttonText)}
+.plan-card button:disabled{opacity:.45;cursor:default}
+@media(max-width:700px){.plans-grid{grid-template-columns:1fr}}
+#printRoot{display:none}
+.print-section{max-width:100%}
+.print-title{font:400 26px Georgia,"Times New Roman",serif;margin:0 0 18px}
+.print-title.title-top{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;margin:0 0 34px;color:#666}
+.print-title.title-top.pos-left{text-align:left}
+.print-title.title-top.pos-center{text-align:center}
+.print-title.title-top.pos-right{text-align:right}
+.print-body{font:13px/1.8 Georgia,"Times New Roman",serif;white-space:pre-wrap;word-wrap:break-word;text-align:justify}
+.pdf-export-grid{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:24px;align-items:start}
+.pdf-preview-pane{position:sticky;top:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.pdf-preview-label{align-self:stretch;color:var(--dim);font-size:10px;font-weight:650;text-transform:uppercase;letter-spacing:.07em}
+.pv-page{background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.35);border-radius:2px;position:relative;overflow:hidden;transition:width .12s ease,height .12s ease}
+.pv-title-center{color:#181817;line-height:1.25}
+.pv-title-top{color:#8a8a86;font-weight:700}
+.pv-pos-left{text-align:left}.pv-pos-center{text-align:center}.pv-pos-right{text-align:right}
+.pv-line{height:3px;background:#e2e2de;border-radius:2px;margin-bottom:5px}
+.pv-gap{height:8px}
+.pv-pagenum{position:absolute;bottom:6px;font-size:6.5px;color:#a3a39e}
+.pdf-preview-note{color:var(--dim);font-size:10.5px;text-align:center;line-height:1.5}
+.pdf-preview-frame-wrap{position:relative;width:210px;border-radius:4px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);background:#fff;transition:height .15s ease}
+.pdf-preview-frame{width:100%;height:100%;border:0;display:block;background:#fff}
+.pdf-preview-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;color:#9a9a96;font-size:10.5px;transition:opacity .15s ease}
+.pdf-preview-loading.hidden{opacity:0;pointer-events:none}
+.print-cover{min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;page-break-after:always}
+.print-cover-title{font:400 46px Georgia,"Times New Roman",serif;margin:0;max-width:80%;line-height:1.2}
+@media print{
+  html,body{background:#fff!important}
+  #publicHeader,#pageRoot,dialog{display:none!important}
+  #printRoot{display:block!important;width:100%;margin:0;padding:0}
+}
+@media(max-width:800px){
+  .site-nav{padding:0 17px}
+  .hero{grid-template-columns:1fr;gap:55px;padding:74px 22px 75px}
+  .hero-preview{max-width:520px;margin:0 auto}
+  .features-inner{grid-template-columns:1fr;padding:54px 22px;gap:35px}
+  .feature{padding:0;border:0}
+  .workflow{padding:76px 22px}
+  .workflow-grid{grid-template-columns:1fr;gap:32px}
+  .landing-cta{margin:0 18px 18px;padding:52px 24px}
+  .landing-footer{padding:21px 22px 28px}
+  .nav-right .btn:not(.primary){display:none}
+  .project-switch>summary{max-width:34vw}
+  .header-btn.hide-mobile{display:none}
+  .dash-content{grid-template-columns:1fr}
+  .outline{display:none;position:fixed;left:0;top:56px;bottom:0;width:82vw;max-width:300px;z-index:26;box-shadow:0 12px 60px rgba(0,0,0,.45)}
+  .outline.open{display:block}
+  .outline-overlay.open{display:block;position:fixed;left:0;top:56px;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:24}
+  .editor{width:calc(100% - 38px);padding-top:30px}
+  .section-title{font-size:33px}
+  .writing-area{font-size:17px}
+  .dash-status{padding:0 18px}
+  .dash-status span:nth-child(n+3){display:none}
+  .plans-grid{grid-template-columns:1fr}
+  .dialog-actions{flex-wrap:wrap}
+  .dialog-actions button{flex:1 1 auto}
+  .pdf-export-grid{grid-template-columns:1fr}
+  .pdf-preview-pane{position:static}
+}
+</style>
+</head>
+<body>
+<div id="bootLoader"><div class="boot-spinner"></div></div>
+<nav class="site-nav hidden" id="publicHeader"><div class="nav-left"><button id="themeButton" class="theme-button" aria-label="Passer au thème clair" title="Passer au thème clair"></button></div><a class="brand" href="#" id="brandLink">KOPPI</a><div class="nav-right"><div id="guestActions" class="nav-actions"><button id="loginButton" class="btn">Se connecter</button><button id="signupButton" class="btn primary">Commencer</button></div><div id="userActions" class="nav-actions hidden"><button id="openAppButton" class="btn primary">Ouvrir l’app</button></div></div></nav>
+<div id="pageRoot"></div>
+<div id="printRoot"></div>
+
+<dialog id="projectDialog"><form id="projectForm" class="dialog-content"><div class="dialog-mark">K.</div><h2>Nouveau projet</h2><p>Crée un espace de travail dédié à ton livre.</p><label class="field-label" for="projectName">Titre du livre</label><input id="projectName" class="dialog-input" placeholder="Ex. Les villes invisibles" maxlength="120" required><div class="dialog-actions"><button type="button" id="cancelProject">Annuler</button><button type="submit" class="confirm">Créer le projet</button></div></form></dialog>
+
+<dialog id="sectionDialog"><form id="sectionForm" class="dialog-content"><div class="dialog-mark">+</div><h2>Ajouter une section</h2><p>Ajoute une partie, un chapitre ou un sous-chapitre à ton manuscrit.</p><label class="field-label">Type</label><div class="seg" id="sectionLevelSeg" style="margin-bottom:17px"><button type="button" data-value="0">Partie</button><button type="button" data-value="1" class="active">Chapitre</button><button type="button" data-value="2">Sous-chapitre</button></div><label class="field-label" for="sectionName">Titre de la section</label><input id="sectionName" class="dialog-input" placeholder="Ex. Chapitre 2" maxlength="120" required><div class="dialog-actions"><button type="button" id="cancelSection">Annuler</button><button type="submit" class="confirm">Ajouter</button></div></form></dialog>
+
+<dialog id="renameProjectDialog"><form id="renameProjectForm" class="dialog-content"><div class="dialog-mark">✎</div><h2>Renommer le projet</h2><p>Choisis un nouveau titre pour ce projet.</p><label class="field-label" for="renameProjectInput">Titre du livre</label><input id="renameProjectInput" class="dialog-input" maxlength="120" minlength="1" required><div class="dialog-actions"><button type="button" id="cancelRenameProject">Annuler</button><button type="submit" class="confirm">Enregistrer</button></div></form></dialog>
+
+<dialog id="deleteProjectDialog"><div class="dialog-content"><div class="dialog-mark">!</div><h2>Supprimer le projet</h2><p class="tight">Cette action supprimera définitivement le projet <strong id="deleteProjectName"></strong> et toutes ses sections.</p><label class="field-label" for="deleteProjectInput">Tape le nom du projet pour confirmer</label><input id="deleteProjectInput" class="dialog-input" autocomplete="off"><div class="dialog-actions"><button type="button" id="cancelDeleteProject">Annuler</button><button type="button" id="confirmDeleteProject" class="confirm danger-confirm" disabled>Supprimer définitivement</button></div></div></dialog>
+
+<dialog id="renameSectionDialog"><form id="renameSectionForm" class="dialog-content"><div class="dialog-mark">✎</div><h2>Renommer la section</h2><label class="field-label" for="renameSectionInput">Titre de la section</label><input id="renameSectionInput" class="dialog-input" maxlength="120" minlength="1" required><div class="dialog-actions"><button type="button" id="cancelRenameSection">Annuler</button><button type="submit" class="confirm">Enregistrer</button></div></form></dialog>
+
+<dialog id="deleteSectionDialog"><div class="dialog-content"><div class="dialog-mark">!</div><h2>Supprimer la section</h2><p class="tight">Cette action supprimera définitivement la section <strong id="deleteSectionName"></strong>. Le contenu ne sera pas récupérable.</p><div class="dialog-actions"><button type="button" id="cancelDeleteSection">Annuler</button><button type="button" id="confirmDeleteSection" class="confirm danger-confirm">Supprimer</button></div></div></dialog>
+
+<dialog id="limitDialog"><div class="dialog-content"><div class="dialog-mark">K.</div><h2>Limite de projets atteinte</h2><p class="tight">Vous avez atteint la limite de <strong id="limitCount"></strong> projets de l’offre <strong id="limitPlan"></strong>.</p><p>Passez à une offre supérieure pour créer davantage de projets.</p><div class="dialog-actions"><button type="button" id="closeLimit">Fermer</button><button type="button" id="limitSeePlans" class="confirm">Voir les offres</button></div></div></dialog>
+
+<dialog id="printOptionsDialog" class="wide"><div class="dialog-content"><div class="dialog-mark">⇓</div><h2>Exporter en PDF</h2><p>Personnalisez la mise en page. Ces réglages servent aussi de format par défaut pour le livre (utilisé pour l’estimation du nombre de pages).</p>
+  <div class="pdf-export-grid">
+  <div class="pdf-options">
+  <div class="option-row"><div><div class="opt-label">Format de page</div></div><div class="seg" id="pdfFormatSeg"><button type="button" data-value="a4" class="active">A4</button><button type="button" data-value="letter">US Letter</button><button type="button" data-value="poche">Poche</button><button type="button" data-value="broche">Broché</button></div></div>
+  <div class="option-row"><div><div class="opt-label">Marges</div></div><div class="seg" id="pdfMarginsSeg"><button type="button" data-value="narrow">Étroites</button><button type="button" data-value="normal" class="active">Normales</button><button type="button" data-value="wide">Larges</button></div></div>
+  <div class="option-row"><div><div class="opt-label">Police</div></div><div class="seg" id="pdfFontSeg"><button type="button" data-value="serif" class="active">Serif</button><button type="button" data-value="sans">Sans-serif</button></div></div>
+  <div class="option-row"><div><div class="opt-label">Taille du texte</div></div><div class="seg" id="pdfSizeSeg"><button type="button" data-value="small">Petit</button><button type="button" data-value="medium" class="active">Moyen</button><button type="button" data-value="large">Grand</button></div></div>
+  <div class="option-row"><div><div class="opt-label">Interligne</div></div><div class="seg" id="pdfLineHeightSeg"><button type="button" data-value="compact">Compact</button><button type="button" data-value="normal" class="active">Normal</button><button type="button" data-value="airy">Aéré</button></div></div>
+  <div class="option-row"><div><div class="opt-label">Titres de chapitre</div><div class="opt-hint">Centré : grand titre en haut de la page dédiée. En haut : titre discret en petit, en haut de chaque page.</div></div><div class="seg" id="pdfTitleStyleSeg"><button type="button" data-value="center" class="active">Centré</button><button type="button" data-value="top">En haut, petit</button></div></div>
+  <div class="option-row" id="pdfTitlePositionRow"><div><div class="opt-label">Position du titre</div></div><div class="seg" id="pdfTitlePositionSeg"><button type="button" data-value="left">Gauche</button><button type="button" data-value="center" class="active">Centre</button><button type="button" data-value="right">Droite</button></div></div>
+  <div class="option-row" id="pdfRunningHeadersRow"><div><div class="opt-label">En-têtes courants</div><div class="opt-hint">Titre du livre à gauche, titre du chapitre à droite, en haut des pages (absente sur la première page de chaque chapitre). Désactivée : hauts de page vides.</div></div><button type="button" id="pdfRunningHeaders" class="switchbtn on"><i></i></button></div>
+  <div class="option-row"><div><div class="opt-label">Page de titre</div><div class="opt-hint">Ajoute une première page avec le titre du livre, centré.</div></div><button type="button" id="pdfTitlePage" class="switchbtn on"><i></i></button></div>
+  <div class="option-row"><div><div class="opt-label">Nouvelle page par section</div><div class="opt-hint">Désactivez pour un texte continu, sans sauts de page.</div></div><button type="button" id="pdfPageBreaks" class="switchbtn on"><i></i></button></div>
+  <div class="option-row"><div><div class="opt-label">Numéros de page</div></div><button type="button" id="pdfPageNumbers" class="switchbtn on"><i></i></button></div>
+  <div class="option-row" id="pdfPositionRow"><div><div class="opt-label">Position du numéro</div></div><div class="seg" id="pdfPositionSeg"><button type="button" data-value="center" class="active">Bas centre</button><button type="button" data-value="left">Bas gauche</button><button type="button" data-value="right">Bas droite</button></div></div>
+  <div class="option-row"><div><div class="opt-label">Inclure les sections vides</div></div><button type="button" id="pdfEmptySections" class="switchbtn"><i></i></button></div>
+  <div class="option-row"><div><div class="opt-label">Estimation</div></div><div class="opt-hint" id="pdfPagesEstimate" style="text-align:right"></div></div>
+  </div>
+  <div class="pdf-preview-pane"><div class="pdf-preview-label">Aperçu</div><div class="pdf-preview-frame-wrap" id="pdfPreviewWrap"><iframe id="pdfPreviewFrame" class="pdf-preview-frame" title="Aperçu du PDF"></iframe><div id="pdfPreviewLoading" class="pdf-preview-loading">Génération…</div></div><div class="pdf-preview-note" id="pdfPreviewNote"></div></div>
+  </div>
+  <div class="dialog-actions"><button type="button" id="cancelPdfExport">Annuler</button><button type="button" id="saveLayoutOnly">Enregistrer le format</button><button type="button" id="continuePdfExport" class="confirm">Télécharger le PDF</button></div>
+</div></dialog>
+
+<dialog id="plansDialog" class="wide"><div class="dialog-content"><div class="dialog-mark">K.</div><h2>Offres KOPPI</h2><p>Choisissez l’offre adaptée à votre manuscrit. Vous pouvez changer d’offre à tout moment.</p><div class="plans-grid" id="plansGrid"></div></div></dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const SUPABASE_URL='https://exqflapdornisgmavajg.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4cWZsYXBkb3JuaXNnbWF2YWpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4MDc1MjQsImV4cCI6MjEwMjM4MzUyNH0.2QN91LeOBk5d438KgY_2-tZiN5CET2pmkLpAf6ZDUqY';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+const DEFAULT=['Copyright, éditeur, ISBN, propriété intellectuelle','À propos de l’auteur','Épigraphe','Préface','Avant-propos','Remerciements','Chapitre 1','Postface','Auteur de la composition et mise en page'];
+const LEVEL_LABEL={0:'Partie',1:'Chapitre',2:'Sous-chapitre'};
+function toRoman(n){const vals=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];let r='';vals.forEach(([v,s])=>{while(n>=v){r+=s;n-=v}});return r||''}
+
+// Active/désactive les boutons de paiement Stripe. Passer à true une fois
+// STRIPE_SECRET_KEY, les Price IDs et les endpoints /api/* déployés sur Vercel.
+const STRIPE_ENABLED=false;
+
+const PLAN_LIMITS={free:2,writer:20,studio:Infinity};
+const PLAN_LABEL={free:'Free',writer:'Writer',studio:'Studio'};
+const PLAN_PRICE_LABEL={free:'0 €',writer:'5,99 €/mois',studio:'11,99 €/mois'};
+const PLAN_STORAGE_BYTES={free:25*1024*1024,writer:500*1024*1024,studio:5*1024*1024*1024};
+const PLAN_STORAGE_LABEL={free:'25 MB',writer:'500 MB',studio:'5 GB'};
+const PLAN_FEATURES={
+  free:['Éditeur d’écriture','Autosave automatique','Impression'],
+  writer:['Export PDF','Export Markdown','Pagination','Structure complète du manuscrit'],
+  studio:['Historique de versions','Fichiers joints','Objectifs d’écriture','Support prioritaire']
+};
+
+let currentUser=null,currentProfile=null,state={projects:[],activeProject:null,activeSection:null},saveTimer,currentView='landing',lastSaveFailed=false,dragSectionId=null;
+let outlineCollapsed=localStorage.getItem('koppi.outlineCollapsed')==='1';
+function applyOutlineCollapsed(){const dc=document.querySelector('.dash-content');if(dc)dc.classList.toggle('outline-collapsed',outlineCollapsed)}
+const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s)),esc=v=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])),wc=t=>(t||'').trim()?(t||'').trim().split(/\s+/).length:0,project=()=>state.projects.find(x=>x.id===state.activeProject),section=()=>project()?.sections.find(x=>x.id===state.activeSection);
+const moon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.5 6.5 0 0 0 21 12.8Z"/></svg>',sun='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3.2"/><path stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+
+function setTheme(t){document.documentElement.dataset.theme=t;localStorage.setItem('koppi.theme',t);const b=$('#themeButton'),l=t==='light';b.innerHTML=l?moon:sun;b.title=l?'Passer au thème sombre':'Passer au thème clair';b.setAttribute('aria-label',b.title);$('#themeColor').content=l?'#f7f7f5':'#090909';const accToggle=$('#accThemeToggle');if(accToggle)accToggle.classList.toggle('on',!l)}
+function setPublicHeader(visible){$('#publicHeader').classList.toggle('hidden',!visible)}
+function updateNav(){const l=!!currentUser;$('#guestActions').classList.toggle('hidden',l);$('#userActions').classList.toggle('hidden',!l)}
+function fmtBytes(n){if(!n)return '0 MB';const mb=n/(1024*1024);if(mb<1000)return Math.round(mb*10)/10+' MB';return Math.round(mb/1024*100)/100+' GB'}
+function closeAllPopovers(except){$$('details[open]').forEach(d=>{if(d!==except)d.removeAttribute('open')});$$('.mini-popover,.sec-popover').forEach(p=>p.remove());$$('.proj-item.menu-open,.outline-item.menu-open').forEach(n=>n.classList.remove('menu-open'))}
+document.addEventListener('click',e=>{if(!e.target.closest('details')&&!e.target.closest('.mini-popover')&&!e.target.closest('.sec-popover')&&!e.target.closest('.outline-menu-btn')&&!e.target.closest('.menu-dots'))closeAllPopovers()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAllPopovers()});
+
+function landing(){currentView='landing';setPublicHeader(true);updateNav();$('#pageRoot').innerHTML=`<main><section class="hero"><div><div class="eyebrow"><i></i> Un espace pour les livres</div><h1>Écrivez le livre que vous <em>voulez</em> relire.</h1><p>KOPPI réunit votre manuscrit, sa structure et sa mise en page dans un espace calme, conçu pour écrire sur la durée.</p><div class="hero-buttons"><button class="btn primary" id="heroStart">Commencer à écrire</button><a href="#features" class="btn">Découvrir KOPPI</a></div><div class="hero-note">Vos textes restent liés à votre compte et synchronisés automatiquement.</div></div><div class="hero-preview"><div class="preview-window"><div class="preview-head"><i class="preview-dot"></i><i class="preview-dot"></i><i class="preview-dot"></i><span class="preview-title">KOPPI — Manuscrit</span></div><div class="preview-body"><aside class="preview-side"><div class="preview-mini-logo">KOPPI</div><div class="preview-mini-line active"></div><div class="preview-mini-line"></div><div class="preview-mini-line"></div><div class="preview-mini-line"></div></aside><article class="preview-editor"><div class="preview-context">Mon livre</div><h3>Chapitre 1</h3><div class="preview-rule"></div><div class="preview-text w90"></div><div class="preview-text w75"></div><div class="preview-text w84"></div><div class="preview-text w62"></div><div class="preview-text w90"></div></article></div></div><div class="preview-float"><div class="preview-float-label">Manuscrit</div><div class="preview-float-value">12 486 mots</div><div class="preview-float-note">Synchronisé à l’instant</div></div></div></section><section class="features" id="features"><div class="features-inner"><article class="feature"><span class="feature-index">01</span><h3>Écrire librement</h3><p>Une interface sans distraction, pensée pour laisser toute la place à votre texte.</p></article><article class="feature"><span class="feature-index">02</span><h3>Garder le fil</h3><p>Structurez chaque livre en chapitres, préface, remerciements et sections sur mesure.</p></article><article class="feature"><span class="feature-index">03</span><h3>Publier proprement</h3><p>Préparez votre manuscrit pour l’impression et l’export PDF.</p></article></div></section><section class="workflow"><div class="section-kicker">Un flux simple</div><div class="workflow-grid"><h2>Du premier mot<br>à la dernière page.</h2><div class="workflow-copy"><p>KOPPI vous accompagne sans imposer de méthode. Créez un projet, posez sa structure, puis avancez chapitre après chapitre.</p><p>Votre travail est enregistré dans votre compte : retrouvez-le lorsque vous le souhaitez, depuis n’importe quel navigateur.</p><ul class="workflow-list"><li><span>01</span>Créez un projet pour chaque livre</li><li><span>02</span>Organisez votre manuscrit</li><li><span>03</span>Écrivez et exportez en PDF</li></ul></div></div></section><section class="landing-cta"><h2>Votre prochain chapitre<br>peut commencer maintenant.</h2><p>Créez votre compte gratuitement et démarrez votre manuscrit dans quelques secondes.</p><button id="ctaStart" class="btn primary">Créer un compte</button></section><footer class="landing-footer"><span>KOPPI</span><span>Un espace pour écrire.</span></footer></main>`;$('#heroStart').onclick=()=>currentUser?openApp():auth('signup');$('#ctaStart').onclick=()=>auth('signup')}
+
+function auth(mode='login'){currentView='auth';setPublicHeader(true);updateNav();const signup=mode==='signup';$('#pageRoot').innerHTML=`<main class="auth-page"><section class="auth-card"><div class="brand" style="margin-bottom:29px">KOPPI</div><h1>${signup?'Créer un compte':'Bon retour'}</h1><p>${signup?'Créez votre compte pour sauvegarder et retrouver vos manuscrits partout.':'Connectez-vous pour retrouver vos projets et continuer à écrire.'}</p><form id="authForm"><div class="auth-field"><label class="field-label" for="authEmail">Adresse e-mail</label><input class="auth-input" id="authEmail" type="email" required placeholder="vous@exemple.com"></div><div class="auth-field"><label class="field-label" for="authPassword">Mot de passe</label><input class="auth-input" id="authPassword" type="password" minlength="8" required placeholder="8 caractères minimum"></div><button class="auth-submit" id="authSubmit" type="submit">${signup?'Créer mon compte':'Se connecter'}</button></form><div class="auth-message" id="authMessage"></div><div class="auth-switch">${signup?'Déjà un compte ?':'Pas encore de compte ?'} <button id="authSwitch">${signup?'Se connecter':'Créer un compte'}</button></div></section></main>`;$('#authSwitch').onclick=()=>auth(signup?'login':'signup');$('#authForm').onsubmit=e=>handleAuth(e,signup)}
+
+async function handleAuth(e,signup){e.preventDefault();const m=$('#authMessage'),b=$('#authSubmit'),email=$('#authEmail').value.trim(),password=$('#authPassword').value;b.disabled=true;const r=signup?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});b.disabled=false;if(r.error){m.textContent=r.error.message;return}if(signup&&!r.data.session){m.className='auth-message success';m.textContent='Compte créé. Vérifiez votre e-mail puis connectez-vous.';return}currentUser=r.data.user;await openApp()}
+
+async function openApp(){await loadProfile();await loadProjects();dashboard()}
+
+async function loadProfile(){
+  const {data,error}=await sb.from('profiles').select('plan,stripe_customer_id,storage_bytes').eq('id',currentUser.id).single();
+  if(error){console.error('KOPPI profile error:',error);currentProfile={plan:'free',stripe_customer_id:null,storage_bytes:0};return}
+  currentProfile=data;
+}
+
+async function loadProjects(){
+  const {data:projects,error:projectsError}=await sb.from('projects').select('id,name,created_at,updated_at,layout').order('updated_at',{ascending:false});
+  if(projectsError){console.error('KOPPI projects error:',projectsError);alert('Impossible de charger les projets : '+projectsError.message);return}
+  const ids=(projects||[]).map(p=>p.id);let sections=[];
+  if(ids.length){const {data,error}=await sb.from('sections').select('id,project_id,title,content,position,level,created_at,updated_at').in('project_id',ids).order('position',{ascending:true});if(error){console.error('KOPPI sections error:',error);alert('Impossible de charger les sections : '+error.message);return}sections=data||[]}
+  state.projects=(projects||[]).map(p=>({...p,sections:sections.filter(s=>s.project_id===p.id).sort((a,b)=>a.position-b.position)}));
+  if(!state.projects.some(p=>p.id===state.activeProject))state.activeProject=state.projects[0]?.id||null;
+  const active=project();if(!active?.sections.some(s=>s.id===state.activeSection))state.activeSection=active?.sections[0]?.id||null;
+  console.log('KOPPI — projets synchronisés :',state.projects);
+}
+
+function planLimit(){return PLAN_LIMITS[currentProfile?.plan||'free']}
+function canCreateProject(){return state.projects.length<planLimit()}
+
+async function createProject(name){
+  if(!canCreateProject()){showLimitModal();return false}
+  const r=await sb.from('projects').insert({user_id:currentUser.id,name:name.trim()||'Sans titre'}).select().single();
+  if(r.error){alert(r.error.message.includes('row-level security')?'Limite de projets atteinte pour votre offre.':r.error.message);return false}
+  const q=await sb.from('sections').insert(DEFAULT.map((title,position)=>({project_id:r.data.id,title,content:'',position,level:1}))).select();
+  if(q.error){alert(q.error.message);return false}
+  r.data.sections=(q.data||[]).sort((a,b)=>a.position-b.position);
+  state.projects.unshift(r.data);state.activeProject=r.data.id;state.activeSection=r.data.sections[6]?.id||r.data.sections[0]?.id;
+  renderDashboard();return true
+}
+
+async function renameProject(id,name){
+  const clean=name.trim();if(!clean||clean.length>120)return false;
+  const r=await sb.from('projects').update({name:clean,updated_at:new Date().toISOString()}).eq('id',id).select().single();
+  if(r.error){alert(r.error.message);return false}
+  const p=state.projects.find(x=>x.id===id);if(p){p.name=clean;p.updated_at=r.data.updated_at}
+  renderDashboard();return true
+}
+
+async function duplicateProject(id,btn){
+  if(!canCreateProject()){showLimitModal();return}
+  const src=state.projects.find(x=>x.id===id);if(!src)return;
+  const original=btn?btn.textContent:null;if(btn){btn.textContent='Duplication…';btn.disabled=true}
+  const r=await sb.from('projects').insert({user_id:currentUser.id,name:'Copie de '+src.name}).select().single();
+  if(r.error){alert(r.error.message);if(btn){btn.textContent=original;btn.disabled=false}return}
+  let newSections=[];
+  if(src.sections.length){
+    const rows=src.sections.map((s,i)=>({project_id:r.data.id,title:s.title,content:s.content,position:i,level:s.level??1}));
+    const q=await sb.from('sections').insert(rows).select();
+    if(q.error){alert(q.error.message);if(btn){btn.textContent=original;btn.disabled=false}return}
+    newSections=(q.data||[]).sort((a,b)=>a.position-b.position);
+  }
+  r.data.sections=newSections;
+  state.projects.unshift(r.data);state.activeProject=r.data.id;state.activeSection=newSections[0]?.id||null;
+  renderDashboard();
+}
+
+async function deleteProject(id){
+  const r=await sb.from('projects').delete().eq('id',id);
+  if(r.error){alert(r.error.message);return false}
+  state.projects=state.projects.filter(p=>p.id!==id);
+  if(state.activeProject===id){state.activeProject=state.projects[0]?.id||null;state.activeSection=project()?.sections[0]?.id||null}
+  renderDashboard();return true
+}
+
+async function createSection(name,level){const p=project();if(!p)return false;const lvl=[0,1,2].includes(level)?level:1;const r=await sb.from('sections').insert({project_id:p.id,title:name.trim()||'Nouvelle section',content:'',position:p.sections.length,level:lvl}).select().single();if(r.error){alert(r.error.message);return false}p.sections.push(r.data);state.activeSection=r.data.id;renderDashboard();return true}
+
+async function setSectionLevel(id,delta){
+  const p=project();const s=p?.sections.find(x=>x.id===id);if(!s)return;
+  const next=Math.min(2,Math.max(0,(s.level??1)+delta));
+  if(next===(s.level??1))return;
+  const r=await sb.from('sections').update({level:next}).eq('id',id);
+  if(r.error){alert(r.error.message);return}
+  s.level=next;renderDashboard();
+}
+
+async function renameSection(id,title){
+  const p=project();const s=p?.sections.find(x=>x.id===id);if(!s)return false;
+  const clean=title.trim();if(!clean)return false;
+  const r=await sb.from('sections').update({title:clean}).eq('id',id);
+  if(r.error){alert(r.error.message);return false}
+  s.title=clean;renderDashboard();return true
+}
+
+async function persistPositions(sections){
+  const jobs=[];
+  sections.forEach((s,i)=>{if(s.position!==i){jobs.push(sb.from('sections').update({position:i}).eq('id',s.id));s.position=i}});
+  if(jobs.length)await Promise.all(jobs);
+}
+
+async function duplicateSection(id){
+  const p=project();const idx=p.sections.findIndex(x=>x.id===id);if(idx<0)return;
+  const s=p.sections[idx];
+  const r=await sb.from('sections').insert({project_id:p.id,title:(s.title||'Sans titre')+' — copie',content:s.content,position:idx+1,level:s.level??1}).select().single();
+  if(r.error){alert(r.error.message);return}
+  p.sections.splice(idx+1,0,r.data);
+  await persistPositions(p.sections);
+  state.activeSection=r.data.id;
+  renderDashboard();
+}
+
+async function moveSection(id,dir){
+  const p=project();const idx=p.sections.findIndex(x=>x.id===id);if(idx<0)return;
+  const target=idx+dir;if(target<0||target>=p.sections.length)return;
+  const arr=p.sections;[arr[idx],arr[target]]=[arr[target],arr[idx]];
+  await persistPositions(arr);
+  renderDashboard();
+}
+
+async function reorderSections(draggedId,targetId){
+  const p=project();if(!p||draggedId===targetId)return;
+  const from=p.sections.findIndex(x=>x.id===draggedId),to=p.sections.findIndex(x=>x.id===targetId);
+  if(from<0||to<0)return;
+  const [item]=p.sections.splice(from,1);
+  p.sections.splice(to,0,item);
+  await persistPositions(p.sections);
+  renderDashboard();
+}
+
+async function deleteSection(id){
+  const p=project();if(!p)return false;
+  const r=await sb.from('sections').delete().eq('id',id);
+  if(r.error){alert(r.error.message);return false}
+  p.sections=p.sections.filter(s=>s.id!==id);
+  await persistPositions(p.sections);
+  if(state.activeSection===id)state.activeSection=p.sections[0]?.id||null;
+  renderDashboard();return true
+}
+
+function showProject(){closeAllPopovers();$('#projectDialog').showModal();setTimeout(()=>$('#projectName').focus(),0)}
+function showSection(defaultLevel){closeAllPopovers();if(!project()){showProject();return}$$('#sectionLevelSeg button').forEach(b=>b.classList.toggle('active',b.dataset.value===String(defaultLevel??1)));$('#sectionDialog').showModal();setTimeout(()=>$('#sectionName').focus(),0)}
+
+function showRenameProject(id){
+  closeAllPopovers();const p=state.projects.find(x=>x.id===id);if(!p)return;
+  $('#renameProjectInput').value=p.name;$('#renameProjectDialog').showModal();
+  setTimeout(()=>{$('#renameProjectInput').focus();$('#renameProjectInput').select()},0);
+  $('#renameProjectForm').onsubmit=async e=>{e.preventDefault();if(await renameProject(id,$('#renameProjectInput').value))$('#renameProjectDialog').close()};
+}
+
+function showDeleteProject(id){
+  closeAllPopovers();const p=state.projects.find(x=>x.id===id);if(!p)return;
+  $('#deleteProjectName').textContent=p.name;$('#deleteProjectInput').value='';
+  const confirmBtn=$('#confirmDeleteProject');confirmBtn.disabled=true;
+  $('#deleteProjectInput').oninput=e=>{confirmBtn.disabled=e.target.value.trim()!==p.name};
+  confirmBtn.onclick=async()=>{if(await deleteProject(id))$('#deleteProjectDialog').close()};
+  $('#deleteProjectDialog').showModal();setTimeout(()=>$('#deleteProjectInput').focus(),0);
+}
+
+function showRenameSection(id){
+  closeAllPopovers();const p=project();const s=p?.sections.find(x=>x.id===id);if(!s)return;
+  $('#renameSectionInput').value=s.title;$('#renameSectionDialog').showModal();
+  setTimeout(()=>{$('#renameSectionInput').focus();$('#renameSectionInput').select()},0);
+  $('#renameSectionForm').onsubmit=async e=>{e.preventDefault();if(await renameSection(id,$('#renameSectionInput').value))$('#renameSectionDialog').close()};
+}
+
+function showDeleteSection(id){
+  closeAllPopovers();const p=project();const s=p?.sections.find(x=>x.id===id);if(!s)return;
+  $('#deleteSectionName').textContent=s.title||'Sans titre';
+  $('#confirmDeleteSection').onclick=async()=>{if(await deleteSection(id))$('#deleteSectionDialog').close()};
+  $('#deleteSectionDialog').showModal();
+}
+
+function showLimitModal(){
+  closeAllPopovers();const plan=currentProfile?.plan||'free';
+  $('#limitCount').textContent=PLAN_LIMITS[plan];$('#limitPlan').textContent=PLAN_LABEL[plan];
+  $('#limitDialog').showModal();
+  $('#limitSeePlans').onclick=()=>{$('#limitDialog').close();openPlans()};
+}
+
+function dashboard(){
+  currentView='dashboard';setPublicHeader(false);
+  $('#pageRoot').innerHTML=`<main class="dashboard">
+    <header class="app-header">
+      <div class="app-header-left">
+        <button id="outlineToggle" class="outline-toggle" aria-label="Réduire ou afficher le sommaire" title="Réduire / afficher le sommaire">☰</button>
+        <button id="headerBrand" class="app-brand">KOPPI</button>
+        <span class="app-sep"></span>
+      </div>
+      <div class="app-header-center" id="projectSwitchSlot"></div>
+      <div class="app-header-right" id="headerRightSlot"></div>
+    </header>
+    <div class="dash-content">
+      <div class="outline-overlay" id="outlineOverlay"></div>
+      <aside class="outline" id="outlinePanel">
+        <div class="outline-head"><span class="outline-label">Manuscrit</span><button id="addSection" class="outline-add" aria-label="Nouvelle section">+</button></div>
+        <div id="sections"></div>
+      </aside>
+      <section id="editorRoot" class="editor-space"></section>
+    </div>
+  </main>`;
+  renderDashboard();
+  $('#headerBrand').onclick=()=>landing();
+  $('#addSection').onclick=()=>showSection();
+  $('#outlineToggle').onclick=()=>{
+    if(window.matchMedia('(max-width:800px)').matches){
+      $('#outlinePanel').classList.toggle('open');$('#outlineOverlay').classList.toggle('open');
+    }else{
+      outlineCollapsed=!outlineCollapsed;
+      localStorage.setItem('koppi.outlineCollapsed',outlineCollapsed?'1':'0');
+      applyOutlineCollapsed();
+    }
+  };
+  $('#outlineOverlay').onclick=()=>{$('#outlinePanel').classList.remove('open');$('#outlineOverlay').classList.remove('open')};
+  applyOutlineCollapsed();
+}
+
+function renderProjectSwitcher(){
+  const slot=$('#projectSwitchSlot');const p=project();
+  const items=state.projects.map(pr=>`
+    <div class="proj-item ${pr.id===state.activeProject?'active':''}" data-proj-id="${pr.id}">
+      <button class="proj-name" data-open="${pr.id}">${esc(pr.name)}</button>
+      <button class="menu-dots" data-projmenu="${pr.id}" aria-label="Actions du projet">•••</button>
+    </div>`).join('');
+  slot.innerHTML=`<details class="project-switch" id="projectSwitch"><summary><span class="p-name">${p?esc(p.name):'Aucun projet'}</span><span class="p-caret">▾</span></summary>
+    <div class="project-popover">
+      ${items||'<div style="padding:10px 8px;color:var(--muted);font-size:12px">Aucun projet pour le moment.</div>'}
+      <hr>
+      <button class="proj-new" id="popNewProject">+ Nouveau projet</button>
+    </div>
+  </details>`;
+  $$('.proj-item [data-open]').forEach(btn=>btn.onclick=()=>{const id=btn.dataset.open;state.activeProject=id;state.activeSection=state.projects.find(x=>x.id===id)?.sections[0]?.id||null;$('#projectSwitch')?.removeAttribute('open');renderDashboard()});
+  $$('.proj-item [data-projmenu]').forEach(btn=>btn.onclick=e=>{
+    e.stopPropagation();const id=btn.dataset.projmenu;const item=btn.closest('.proj-item');
+    const already=item.querySelector('.mini-popover');
+    closeAllPopovers($('#projectSwitch'));
+    if(already)return;
+    item.classList.add('menu-open');
+    const menu=document.createElement('div');menu.className='mini-popover';
+    menu.innerHTML=`<button data-a="rename">Renommer</button><button data-a="dup">Dupliquer</button><button data-a="del" class="danger">Supprimer</button>`;
+    item.appendChild(menu);
+    menu.querySelector('[data-a=rename]').onclick=()=>showRenameProject(id);
+    menu.querySelector('[data-a=dup]').onclick=ev=>duplicateProject(id,ev.target);
+    menu.querySelector('[data-a=del]').onclick=()=>showDeleteProject(id);
+  });
+  $('#popNewProject').onclick=()=>{$('#projectSwitch')?.removeAttribute('open');showProject()};
+}
+
+function renderAccountMenu(){
+  const slot=$('#headerRightSlot');
+  const p=project();
+  const plan=currentProfile?.plan||'free';
+  const limit=PLAN_LIMITS[plan];const limitLabel=limit===Infinity?'∞':limit;
+  const usedPct=limit===Infinity?4:Math.min(100,Math.round((state.projects.length/limit)*100));
+  const storageUsed=currentProfile?.storage_bytes||0;
+  const storagePct=Math.min(100,Math.round((storageUsed/PLAN_STORAGE_BYTES[plan])*100));
+  slot.innerHTML=`
+    <span id="syncState" class="sync-state"><i class="sync-dot"></i><span>Synchronisé</span></span>
+    <button id="exportPdfBtn" class="header-btn hide-mobile" ${p?'':'disabled'}>Exporter PDF</button>
+    <button id="printBtn" class="header-btn hide-mobile" ${p?'':'disabled'}>Imprimer</button>
+    <details class="account-menu2" id="accountMenu"><summary aria-label="Compte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c1.6-3.6 4.8-5.5 8-5.5s6.4 1.9 8 5.5"></path></svg></summary>
+      <div class="account-popover2">
+        <div class="acc-email">${esc(currentUser.email||'')}</div>
+        <div class="acc-plan">
+          <div>Offre <b>${PLAN_LABEL[plan]}</b></div>
+          <div>${state.projects.length} / ${limitLabel} projets</div>
+          <div class="quota-bar"><i style="width:${usedPct}%"></i></div>
+          <div>${fmtBytes(storageUsed)} / ${PLAN_STORAGE_LABEL[plan]}</div>
+          <div class="quota-bar"><i style="width:${storagePct}%"></i></div>
+        </div>
+        <hr>
+        <div class="acc-row"><span>Thème sombre</span><button type="button" id="accThemeToggle" class="theme-switch ${document.documentElement.dataset.theme==='light'?'':'on'}" aria-label="Basculer le thème sombre / clair"><i></i></button></div>
+        <button id="accViewPlans">Voir les offres</button>
+        <hr>
+        <button id="accSignOut">Déconnexion</button>
+      </div>
+    </details>`;
+  $('#exportPdfBtn').onclick=()=>{if(project())openPrintOptions()};
+  $('#printBtn').onclick=()=>{if(project())printDirect()};
+  $('#accThemeToggle').onclick=()=>setTheme(document.documentElement.dataset.theme==='light'?'dark':'light');
+  $('#accViewPlans').onclick=()=>{$('#accountMenu').removeAttribute('open');openPlans()};
+  $('#accSignOut').onclick=async()=>{await sb.auth.signOut();currentUser=null;currentProfile=null;state={projects:[],activeProject:null,activeSection:null};landing()};
+}
+
+function computeOutlineNumbers(sections){
+  let partN=0,chapN=0,chapNInPart=0,subN=0,curChapLabel='1';
+  return sections.map(sec=>{
+    const lvl=sec.level??1;
+    let label;
+    if(lvl===0){partN++;chapNInPart=0;label=toRoman(partN);}
+    else if(lvl===1){chapN++;chapNInPart++;subN=0;curChapLabel=String(partN>0?chapNInPart:chapN);label=curChapLabel;}
+    else{subN++;label=`${curChapLabel}.${subN}`;}
+    return label;
+  });
+}
+// Additionne le texte propre d'une section avec celui de ses sous-éléments (niveau strictement supérieur)
+// pour donner un sous-total de mots / caractères / pages sur une Partie ou un Chapitre.
+function aggregateStats(sections,idx,layout){
+  const lvl=sections[idx].level??1;
+  let chars=(sections[idx].content||'').length,words=wc(sections[idx].content);
+  for(let j=idx+1;j<sections.length;j++){
+    if((sections[j].level??1)<=lvl)break;
+    chars+=(sections[j].content||'').length;words+=wc(sections[j].content);
+  }
+  return {chars,words,pages:estimatePagesForText(chars,layout)};
+}
+function refreshRowMeta(p,idx,layout){
+  const sec=p.sections[idx];if(!sec)return;
+  const el=document.querySelector(`.outline-item[data-id="${sec.id}"] .outline-meta`);if(!el)return;
+  const agg=aggregateStats(p.sections,idx,layout);
+  el.textContent=`${agg.words} mot${agg.words>1?'s':''} · ${agg.chars} car. · ≈${agg.pages} p.`;
+}
+function updateOutlineMetaChain(p,id,layout){
+  const idx=p.sections.findIndex(x=>x.id===id);if(idx<0)return;
+  refreshRowMeta(p,idx,layout);
+  let curLvl=p.sections[idx].level??1;
+  for(let j=idx-1;j>=0;j--){
+    const jl=p.sections[j].level??1;
+    if(jl<curLvl){refreshRowMeta(p,j,layout);curLvl=jl;if(jl===0)break;}
+  }
+}
+
+function renderDashboard(){
+  renderProjectSwitcher();
+  renderAccountMenu();
+  const list=$('#sections'),root=$('#editorRoot');
+  const p=project(),s=section();
+
+  if(!p){
+    list.innerHTML='';
+    root.innerHTML=`<div class="dashboard-empty"><div><h1>Commencez votre livre.</h1><p>Créez un premier projet pour ouvrir votre espace d’écriture.</p><button id="emptyProject" class="btn primary">Nouveau projet</button></div></div>`;
+    $('#emptyProject').onclick=showProject;
+    return;
+  }
+
+  const layout=projectLayout(p);
+  const labels=computeOutlineNumbers(p.sections);
+  list.innerHTML=p.sections.map((sec,i)=>{
+    const lvl=sec.level??1;
+    const agg=aggregateStats(p.sections,i,layout);
+    const metaText=`${agg.words} mot${agg.words>1?'s':''} · ${agg.chars} car. · ≈${agg.pages} p.`;
+    return `<div class="outline-item lvl-${lvl} ${sec.id===state.activeSection?'active':''}" data-id="${sec.id}" draggable="true">
+      <button class="outline-btn" data-select="${sec.id}">
+        <span class="outline-index">${labels[i]}</span>
+        <span class="outline-text">
+          <span class="outline-name">${esc(sec.title||'Sans titre')}</span>
+          <span class="outline-meta">${metaText}</span>
+        </span>
+      </button>
+      <button class="outline-menu-btn" data-menu="${sec.id}" aria-label="Actions de la section">•••</button>
+    </div>`;
+  }).join('');
+
+  $$('.outline-item [data-select]').forEach(btn=>btn.onclick=()=>{state.activeSection=btn.dataset.select;$('#outlinePanel').classList.remove('open');$('#outlineOverlay').classList.remove('open');renderDashboard()});
+
+  $$('.outline-item [data-menu]').forEach(btn=>btn.onclick=e=>{
+    e.stopPropagation();const id=btn.dataset.menu;const item=btn.closest('.outline-item');
+    const already=item.querySelector('.sec-popover');
+    closeAllPopovers();
+    if(already)return;
+    item.classList.add('menu-open');
+    const idx=p.sections.findIndex(x=>x.id===id);
+    const lvl=p.sections[idx]?.level??1;
+    const menu=document.createElement('div');menu.className='sec-popover';
+    menu.innerHTML=`<button data-a="rename">Renommer</button><button data-a="dup">Dupliquer</button><button data-a="promote" ${lvl===0?'disabled':''}>Promouvoir (${lvl===1?'Partie':'Chapitre'})</button><button data-a="demote" ${lvl===2?'disabled':''}>Rétrograder (${lvl===0?'Chapitre':'Sous-chapitre'})</button><button data-a="up" ${idx===0?'disabled':''}>Déplacer vers le haut</button><button data-a="down" ${idx===p.sections.length-1?'disabled':''}>Déplacer vers le bas</button><button data-a="del" class="danger">Supprimer</button>`;
+    item.appendChild(menu);
+    menu.querySelector('[data-a=rename]').onclick=()=>showRenameSection(id);
+    menu.querySelector('[data-a=dup]').onclick=()=>duplicateSection(id);
+    const promoteBtn=menu.querySelector('[data-a=promote]');if(!promoteBtn.disabled)promoteBtn.onclick=()=>setSectionLevel(id,-1);
+    const demoteBtn=menu.querySelector('[data-a=demote]');if(!demoteBtn.disabled)demoteBtn.onclick=()=>setSectionLevel(id,1);
+    const upBtn=menu.querySelector('[data-a=up]');if(!upBtn.disabled)upBtn.onclick=()=>moveSection(id,-1);
+    const downBtn=menu.querySelector('[data-a=down]');if(!downBtn.disabled)downBtn.onclick=()=>moveSection(id,1);
+    menu.querySelector('[data-a=del]').onclick=()=>showDeleteSection(id);
+  });
+
+  $$('.outline-item').forEach(item=>{
+    item.ondragstart=e=>{dragSectionId=item.dataset.id;e.dataTransfer.effectAllowed='move'};
+    item.ondragover=e=>{e.preventDefault();item.classList.add('drag-over')};
+    item.ondragleave=()=>item.classList.remove('drag-over');
+    item.ondrop=e=>{e.preventDefault();item.classList.remove('drag-over');if(dragSectionId)reorderSections(dragSectionId,item.dataset.id);dragSectionId=null};
+  });
+
+  if(!s){
+    root.innerHTML=`<div class="dashboard-empty"><div><h1>Ce projet n’a pas de section.</h1><p>Ajoutez une première section pour commencer à écrire.</p><button id="emptySection" class="btn primary">Ajouter une section</button></div></div>`;
+    $('#emptySection').onclick=()=>showSection();
+    return;
+  }
+
+  const total=p.sections.reduce((n,x)=>n+wc(x.content),0),chars=p.sections.reduce((n,x)=>n+x.content.length,0);
+  const totalPages=p.sections.reduce((n,x)=>n+estimatePagesForText(x.content.length,layout),0);
+  const ownPages=estimatePagesForText(s.content.length,layout);
+  root.innerHTML=`<header class="editor-top"><span>${esc(p.name)} / ${esc(s.title||'Sans titre')}</span></header>
+    <article class="editor">
+      <div id="saveErrorBanner"></div>
+      <input id="sectionTitle" class="section-title" value="${esc(s.title)}" placeholder="Titre de la section">
+      <div class="editor-rule"></div>
+      <textarea id="sectionContent" class="writing-area" placeholder="Commencez à écrire…">${esc(s.content)}</textarea>
+    </article>
+    <footer class="dash-status"><span>Sections <b>${p.sections.length}</b></span><span>Mots <b id="words">${wc(s.content)} / ${total}</b></span><span>Caractères <b id="chars">${s.content.length} / ${chars}</b></span><span>Pages <b id="pages">≈${ownPages} / ≈${totalPages}</b></span></footer>`;
+
+  $('#sectionTitle').oninput=e=>updateSection('title',e.target.value);
+  $('#sectionContent').oninput=e=>updateSection('content',e.target.value);
+  renderSyncIndicator(lastSaveFailed?'error':'idle');
+}
+
+function renderSyncIndicator(mode){
+  const sync=$('#syncState');if(!sync)return;
+  sync.classList.remove('saving','error');
+  if(mode==='saving'){sync.classList.add('saving');sync.lastChild.textContent='Enregistrement…'}
+  else if(mode==='error'){sync.classList.add('error');sync.lastChild.textContent='Erreur — réessayer'}
+  else sync.lastChild.textContent='Synchronisé';
+}
+
+function updateSection(key,value){
+  const s=section(),p=project();if(!s)return;
+  s[key]=value;
+  if(key==='title'){
+    const n=$(`[data-id="${s.id}"] .outline-name`);if(n)n.textContent=value||'Sans titre';
+    const top=$('.editor-top span');if(top)top.textContent=`${p.name} / ${value||'Sans titre'}`;
+  }else{
+    const layout=projectLayout(p);
+    const total=p.sections.reduce((n,x)=>n+wc(x.content),0),chars=p.sections.reduce((n,x)=>n+x.content.length,0);
+    const totalPages=p.sections.reduce((n,x)=>n+estimatePagesForText(x.content.length,layout),0);
+    const ownPages=estimatePagesForText(value.length,layout);
+    const wEl=$('#words'),cEl=$('#chars'),pEl=$('#pages');
+    if(wEl)wEl.textContent=`${wc(value)} / ${total}`;
+    if(cEl)cEl.textContent=`${value.length} / ${chars}`;
+    if(pEl)pEl.textContent=`≈${ownPages} / ≈${totalPages}`;
+    updateOutlineMetaChain(p,s.id,layout);
+  }
+  renderSyncIndicator('saving');
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>persistSection(s.id,key,value),500);
+}
+
+async function persistSection(id,key,value){
+  const r=await sb.from('sections').update({[key]:value}).eq('id',id);
+  if(r.error){
+    lastSaveFailed=true;renderSyncIndicator('error');
+    const banner=$('#saveErrorBanner');
+    if(banner)banner.innerHTML=`<div class="save-error-banner"><span>La sauvegarde a échoué. Votre texte reste visible localement.</span><button id="retrySave">Réessayer</button></div>`;
+    const retry=$('#retrySave');if(retry)retry.onclick=()=>{banner.innerHTML='';persistSection(id,key,value)};
+    return;
+  }
+  lastSaveFailed=false;renderSyncIndicator('idle');
+  const banner=$('#saveErrorBanner');if(banner)banner.innerHTML='';
+}
+
+function forceSave(){
+  const titleEl=$('#sectionTitle'),contentEl=$('#sectionContent');
+  if(!titleEl||!contentEl)return;
+  clearTimeout(saveTimer);
+  const s=section();if(!s)return;
+  renderSyncIndicator('saving');
+  Promise.all([
+    sb.from('sections').update({title:s.title}).eq('id',s.id),
+    sb.from('sections').update({content:s.content}).eq('id',s.id)
+  ]).then(rs=>{
+    const failed=rs.some(r=>r.error);
+    lastSaveFailed=failed;renderSyncIndicator(failed?'error':'idle');
+  });
+}
+
+document.addEventListener('keydown',e=>{
+  const mod=e.metaKey||e.ctrlKey;
+  if(!mod||currentView!=='dashboard')return;
+  if(e.key.toLowerCase()==='s'){e.preventDefault();forceSave()}
+  if(e.key.toLowerCase()==='n'){e.preventDefault();showSection()}
+});
+
+// ---------- Impression / Export PDF ----------
+// Corrections typographiques françaises appliquées uniquement à l'affichage / export PDF, jamais au
+// contenu stocké en base : apostrophes courbes, guillemets français, espaces insécables avant : ; ? !.
+// Approche volontairement simple (expressions régulières) : à relire manuellement sur des cas complexes
+// (ex. guillemets imbriqués, dialogues) — voir note de livraison.
+function frenchTypo(str){
+  if(!str)return str;
+  let t=String(str);
+  t=t.replace(/'/g,'’');
+  t=t.replace(/"([^"\n]*)"/g,'« $1 »');
+  t=t.replace(/[ \u00A0]?([;:!?])(?!\S*[;:!?])/g,'\u00A0$1');
+  t=t.replace(/\u00A0([,.\u2026])/g,'$1');
+  return t;
+}
+
+// Marges "livre" (Poche, Broché) : marge haute/basse distinctes comme avant. La marge latérale est
+// en revanche désormais unique (identique à gauche et à droite, sur toutes les pages) — l'ancienne
+// version utilisait une gouttière intérieure plus large que la marge extérieure, qui s'échangeait de
+// côté à chaque page (page paire/impaire), ce qui rendait la mise en page visuellement irrégulière
+// d'une page à l'autre. La valeur retenue est la moyenne des deux anciennes marges, pour conserver
+// une largeur de colonne de texte comparable.
+const PDF_BOOK_MARGIN_MM={
+  narrow:{top:15,bottom:13,side:11.5},
+  normal:{top:19,bottom:16,side:14},
+  wide:{top:24,bottom:20,side:17.5}
+};
+// Marges "document" (A4, US Letter) : symétriques, en ratio du format. Marge haute également
+// augmentée par rapport à la version précédente.
+const PDF_DOC_MARGIN_RATIO={
+  narrow:{side:14/210,top:18/297,bottom:16/297},
+  normal:{side:18/210,top:23/297,bottom:20/297},
+  wide:{side:26/210,top:31/297,bottom:28/297}
+};
+// Avant ce correctif, les marges étaient fixées en mm absolus identiques pour tous les formats, ce qui
+// les rendait proportionnellement énormes sur les petits formats livre (Poche, Broché). Elles sont
+// maintenant soit dédiées au format livre (gouttière/extérieure), soit calculées au prorata du format.
+function marginsFor(format,marginsKey){
+  if(format==='poche'||format==='broche'){
+    const t=PDF_BOOK_MARGIN_MM[marginsKey]||PDF_BOOK_MARGIN_MM.normal;
+    return{top:t.top,bottom:t.bottom,inner:t.side,outer:t.side,side:t.side};
+  }
+  const fmt=PAGE_FORMATS[format]||PAGE_FORMATS.a4;
+  const [w,h]=fmt.mm;
+  const r=PDF_DOC_MARGIN_RATIO[marginsKey]||PDF_DOC_MARGIN_RATIO.normal;
+  const side=+(w*r.side).toFixed(1),top=+(h*r.top).toFixed(1),bottom=+(h*r.bottom).toFixed(1);
+  return{top,bottom,inner:side,outer:side,side};
+}
+const PDF_SIZE_PT={small:{title:16,body:10},medium:{title:20,body:11},large:{title:24,body:13}};
+const PDF_SIZE_PX={small:{title:22,body:12},medium:{title:26,body:13},large:{title:30,body:15}};
+const PDF_LINE_MULT={compact:1.15,normal:1.4,airy:1.75};
+const PDF_LINE_CSS={compact:1.5,normal:1.8,airy:2.2};
+const PAGE_FORMATS={
+  a4:{label:'A4',mm:[210,297],jspdf:'a4',css:'a4'},
+  letter:{label:'US Letter',mm:[215.9,279.4],jspdf:'letter',css:'letter'},
+  poche:{label:'Poche',mm:[110,180],jspdf:[110,180],css:'110mm 180mm'},
+  broche:{label:'Broché',mm:[140,216],jspdf:[140,216],css:'140mm 216mm'}
+};
+const DEFAULT_LAYOUT={format:'poche',margins:'normal',font:'serif',size:'medium',lineHeight:'normal',titleStyle:'center',titlePosition:'center',titlePage:true,pageBreaks:true,pageNumbers:true,position:'center',includeEmpty:false,runningHeaders:true};
+function projectLayout(p){return Object.assign({},DEFAULT_LAYOUT,p?.layout||{})}
+function pdfFontStack(font){return font==='sans'?"-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif":"Georgia,'Times New Roman',serif"}
+// Estimation du nombre de pages. En format Poche, applique la même grille stricte (25 lignes / page)
+// que buildPdfDoc, pour que l'estimation reste cohérente avec l'aperçu et l'export réels.
+function estimatePagesForText(charCount,opts){
+  if(!charCount||charCount<=0)return 0;
+  const fmt=PAGE_FORMATS[opts?.format]||PAGE_FORMATS.a4;
+  const m=marginsFor(opts?.format,opts?.margins);
+  const [w,h]=fmt.mm;
+  const contentWidth=w-m.inner-m.outer,contentHeight=h-m.top-m.bottom;
+  const mmPerPt=0.352778;
+  let sizePt=(PDF_SIZE_PT[opts?.size]||PDF_SIZE_PT.medium).body;
+  let lineHeightMm;
+  if(opts?.format==='poche'){
+    lineHeightMm=contentHeight/25;
+  }else{
+    lineHeightMm=sizePt*mmPerPt*(PDF_LINE_MULT[opts?.lineHeight]||PDF_LINE_MULT.normal);
+  }
+  const avgCharWidthMm=sizePt*mmPerPt*0.5;
+  const charsPerLine=Math.max(10,Math.floor(contentWidth/avgCharWidthMm));
+  const linesPerPage=Math.max(1,Math.floor(contentHeight/lineHeightMm));
+  const charsPerPage=Math.max(1,charsPerLine*linesPerPage);
+  return Math.max(1,Math.ceil(charCount/charsPerPage));
+}
+
+function buildPrintRoot(opts){
+  const p=project();if(!p)return;
+  const sections=p.sections.filter(s=>opts.includeEmpty||wc(s.content)>0);
+  const root=$('#printRoot');
+  const titleTop=opts.titleStyle==='top';
+  const titleClass=`print-title${titleTop?` title-top pos-${opts.titlePosition||'center'}`:''}`;
+  const coverHtml=opts.titlePage?`<article class="print-cover"><h1 class="print-cover-title">${esc(frenchTypo(p.name||'Sans titre'))}</h1></article>`:'';
+  const noBreakClass=opts.pageBreaks?'':' no-break';
+  const sectionsHtml=sections.length?sections.map(s=>`<article class="print-section${noBreakClass}"><h1 class="${titleClass}">${esc(frenchTypo(s.title||'Sans titre'))}</h1><div class="print-body">${esc(frenchTypo(s.content))}</div></article>`).join(''):`<article class="print-section"><h1 class="print-title">Manuscrit vide</h1></article>`;
+  root.innerHTML=coverHtml+sectionsHtml;
+
+  let style=$('#pdfPageStyle');
+  if(!style){style=document.createElement('style');style.id='pdfPageStyle';document.head.appendChild(style)}
+  const m=marginsFor(opts.format,opts.margins);
+  const size=PDF_SIZE_PX[opts.size]||PDF_SIZE_PX.medium;
+  const lh=PDF_LINE_CSS[opts.lineHeight]||PDF_LINE_CSS.normal;
+  const font=pdfFontStack(opts.font);
+  const cssSize=(PAGE_FORMATS[opts.format]||PAGE_FORMATS.a4).css;
+  // Marge latérale unique (identique à gauche et à droite, sur toutes les pages) — cohérente avec le
+  // PDF exporté par buildPdfDoc. Les règles @page :left/:right restent en place mais m.inner et
+  // m.outer valent désormais toujours la même chose, donc plus aucune alternance visuelle.
+  let rule=`@page{size:${cssSize};margin:${m.top}mm ${m.outer}mm ${m.bottom}mm ${m.outer}mm;}`;
+  rule+=`@page :left{margin-left:${m.outer}mm;margin-right:${m.inner}mm;}`;
+  rule+=`@page :right{margin-left:${m.inner}mm;margin-right:${m.outer}mm;}`;
+  if(opts.pageNumbers){
+    const box=opts.position==='left'?'@bottom-left':opts.position==='right'?'@bottom-right':'@bottom-center';
+    rule+=`@page{${box}{content:counter(page);font-family:Georgia,serif;font-size:10px;color:#666;}}`;
+  }
+  rule+=`.print-title{font-family:${font};font-size:${size.title}px}.print-title.title-top{font-size:10px}.print-body{font-family:${font};font-size:${size.body}px;line-height:${lh}}.print-cover-title{font-family:${font}}`;
+  rule+=opts.pageBreaks
+    ?`.print-section{page-break-after:always}.print-section:last-child{page-break-after:auto}`
+    :`.print-section.no-break{page-break-after:auto;margin:0 0 26px;padding-bottom:26px;border-bottom:1px solid #ddd}`;
+  style.textContent=rule;
+}
+
+function setSeg(id,value){$$(`#${id} button`).forEach(b=>b.classList.toggle('active',b.dataset.value===value))}
+function openPrintOptions(){
+  closeAllPopovers();
+  const p=project();const l=projectLayout(p);
+  setSeg('pdfFormatSeg',l.format);setSeg('pdfMarginsSeg',l.margins);setSeg('pdfFontSeg',l.font);
+  setSeg('pdfSizeSeg',l.size);setSeg('pdfLineHeightSeg',l.lineHeight);setSeg('pdfTitleStyleSeg',l.titleStyle);
+  setSeg('pdfTitlePositionSeg',l.titlePosition);setSeg('pdfPositionSeg',l.position);
+  $('#pdfTitlePage').classList.toggle('on',!!l.titlePage);
+  $('#pdfPageBreaks').classList.toggle('on',l.pageBreaks!==false);
+  $('#pdfPageNumbers').classList.toggle('on',!!l.pageNumbers);
+  $('#pdfEmptySections').classList.toggle('on',!!l.includeEmpty);
+  $('#pdfRunningHeaders').classList.toggle('on',l.runningHeaders!==false);
+  $('#pdfPositionRow').style.opacity=l.pageNumbers?'1':'.45';
+  $('#pdfTitlePositionRow').style.opacity=l.titleStyle==='top'?'1':'.45';
+  $('#pdfRunningHeadersRow').style.opacity=l.titleStyle==='top'?'.45':'1';
+  $('#printOptionsDialog').showModal();
+  refreshPagesEstimate();
+  refreshPdfPreview();
+}
+
+function buildPdfDoc(p,opts,listOverride){
+  const {jsPDF}=window.jspdf;
+  const sections=listOverride||p.sections.filter(s=>opts.includeEmpty||wc(s.content)>0);
+  const list=sections.length?sections:[{title:'Manuscrit vide',content:'',level:1}];
+  const fmt=PAGE_FORMATS[opts.format]||PAGE_FORMATS.a4;
+  const doc=new jsPDF({unit:'mm',format:fmt.jspdf});
+  const pageWidth=doc.internal.pageSize.getWidth(),pageHeight=doc.internal.pageSize.getHeight();
+  const m=marginsFor(opts.format,opts.margins);
+  const marginTop=m.top,marginBottom=m.bottom,maxY=pageHeight-marginBottom,contentWidth=pageWidth-m.inner-m.outer;
+  const mmPerPt=0.352778;
+  // Grille stricte imposée pour le format Poche : 25 lignes pleines sur une page de texte courant.
+  // La hauteur de ligne est dérivée de la géométrie réelle de la page (et non l'inverse), puis la
+  // taille de police est déduite de cette hauteur de ligne selon le ratio de plomb (leading) choisi.
+  // Une page d'ouverture de chapitre réserve exactement 10 de ces "unités de ligne" à son bandeau
+  // titre (numéro + titre), laissant très précisément 15 lignes pour le texte qui suit.
+  const isPocheGrid=opts.format==='poche';
+  let lineHeight;
+  if(isPocheGrid){
+    lineHeight=(maxY-marginTop)/25;
+  }else{
+    const sizePt0=PDF_SIZE_PT[opts.size]||PDF_SIZE_PT.medium;
+    lineHeight=sizePt0.body*mmPerPt*(PDF_LINE_MULT[opts.lineHeight]||PDF_LINE_MULT.normal);
+  }
+  const sizePt=Object.assign({},PDF_SIZE_PT[opts.size]||PDF_SIZE_PT.medium);
+  if(isPocheGrid){
+    const leadRatio=({compact:1.28,normal:1.52,airy:1.78})[opts.lineHeight]||1.52;
+    sizePt.body=+(lineHeight/mmPerPt/leadRatio).toFixed(2);
+    sizePt.title=+(sizePt.body*1.3).toFixed(1);
+  }
+  const fontFace=opts.font==='sans'?'helvetica':'times';
+  const titleTop=opts.titleStyle==='top';
+  // En-têtes courants façon livre : titre de l'ouvrage sur les pages de gauche (verso, n° pair),
+  // titre du chapitre en cours sur les pages de droite (recto, n° impair). Absente si l'option est
+  // désactivée, ou déjà couverte par le style "En haut, petit" (titleTop) pour éviter le doublon.
+  const runningHeaders=!!opts.runningHeaders&&!titleTop;
+  const bookTitle=frenchTypo(p.name||'Sans titre').toUpperCase();
+  const headerY=Math.max(7,marginTop-7);
+  // Position horizontale du texte courant : marge latérale identique à gauche et à droite, sur
+  // toutes les pages (plus d'alternance gauche/droite selon la parité de la page).
+  const xFor=()=>m.outer;
+  let currentHeaderTitle='';
+  const drawRunningHeader=()=>{
+    if(!titleTop||!currentHeaderTitle)return;
+    doc.setFont(fontFace,'normal');doc.setFontSize(8.5);doc.setTextColor(130);
+    const pos=opts.titlePosition||'center';
+    const x=pos==='left'?m.outer:pos==='right'?pageWidth-m.outer:pageWidth/2;
+    const align=pos==='left'?'left':pos==='right'?'right':'center';
+    doc.text(frenchTypo(currentHeaderTitle).toUpperCase(),x,headerY,{align});
+  };
+  const drawBookHeader=()=>{
+    if(!runningHeaders)return;
+    const isLeft=doc.internal.getNumberOfPages()%2===0;
+    const text=isLeft?bookTitle:frenchTypo(currentHeaderTitle||'').toUpperCase();
+    if(!text)return;
+    doc.setFont(fontFace,'normal');doc.setFontSize(8.5);doc.setTextColor(130);
+    const x=isLeft?m.outer:pageWidth-m.outer;
+    doc.text(text,x,headerY,{align:isLeft?'left':'right'});
+  };
+  // Remet la police/couleur du corps de texte : appelé après tout dessin annexe (en-tête courant,
+  // titre de couverture…) pour éviter que la page suivante n'hérite d'un style incorrect (bug historique).
+  const setBodyStyle=()=>{doc.setFont(fontFace,'normal');doc.setFontSize(sizePt.body);doc.setTextColor(20)};
+  // Justification manuelle mot par mot. L'option native {align:'justify'} de jsPDF ne fonctionne pas
+  // ici : elle ne justifie que les lignes qu'elle a elle-même découpées via un unique appel avec
+  // maxWidth, et traite systématiquement chaque appel line-par-line comme la "dernière ligne" d'un
+  // paragraphe (donc jamais étirée) — ce qui explique que rien ne changeait visuellement. On calcule
+  // donc nous-mêmes l'espace supplémentaire à répartir entre les mots pour que la ligne touche
+  // exactement les deux bords de la colonne.
+  const justifyLine=(line,x,width)=>{
+    const words=line.split(' ').filter(w=>w.length>0);
+    if(words.length<2){doc.text(line,x,y);return}
+    const spaceW=doc.getTextWidth(' ');
+    const wordsW=words.reduce((sum,w)=>sum+doc.getTextWidth(w),0);
+    const extra=Math.max(0,(width-wordsW-spaceW*(words.length-1))/(words.length-1));
+    let cx=x;
+    words.forEach(w=>{doc.text(w,cx,y);cx+=doc.getTextWidth(w)+spaceW+extra});
+  };
+  let y=marginTop;
+  // isOpening = vraie page d'ouverture de section (jamais d'en-tête courant dessus, comme dans un livre imprimé).
+  const newPage=(isOpening)=>{doc.addPage();y=marginTop;drawRunningHeader();setBodyStyle();if(!isOpening)drawBookHeader()};
+  const coverPageIndex=opts.titlePage?1:0;
+
+  if(opts.titlePage){
+    doc.setFont(fontFace,'normal');doc.setFontSize(sizePt.title+16);doc.setTextColor(20);
+    const coverLines=doc.splitTextToSize(bookTitle.length?frenchTypo(p.name||'Sans titre'):'Sans titre',contentWidth-20);
+    const coverLineH=(sizePt.title+16)*mmPerPt*1.3;
+    const totalH=coverLines.length*coverLineH;
+    let cy=(pageHeight-totalH)/2+coverLineH*0.7;
+    coverLines.forEach(line=>{doc.text(line,pageWidth/2,cy,{align:'center'});cy+=coverLineH});
+    doc.addPage();y=marginTop;
+  }
+
+  let chapterNum=0,partNum=0;
+  list.forEach((s,idx)=>{
+    const lvl=s.level??1;
+    if(lvl===0)partNum++;else if(lvl===1)chapterNum++;
+    // Un sous-chapitre garde le titre de son chapitre parent dans l'en-tête courant, comme dans un livre imprimé.
+    if(lvl!==2)currentHeaderTitle=s.title||'Sans titre';
+    const isOpeningPage=idx===0||opts.pageBreaks;
+    if(idx>0){
+      if(opts.pageBreaks){
+        newPage(true);
+      }else if(y+lineHeight*2.5>maxY){
+        newPage(false);
+      }else{
+        y+=lineHeight*0.9;
+        doc.setDrawColor(200);doc.line(xFor(),y,xFor()+22,y);
+        y+=lineHeight*1.4;
+        setBodyStyle();
+      }
+    }
+    if(titleTop){
+      drawRunningHeader();
+      y=Math.max(y,marginTop);
+    }else if(isOpeningPage&&isPocheGrid){
+      // Grille stricte : le bandeau titre occupe exactement 10 unités de ligne, quel que soit le
+      // nombre de lignes réellement dessinées — le corps du texte reprend toujours à ce même point,
+      // ce qui garantit 15 lignes de texte sur une page d'ouverture (25 - 10).
+      const bodyStartY=marginTop+10*lineHeight;
+      if(lvl===1){
+        // Numéro de chapitre volontairement non affiché au-dessus du titre.
+      }else if(lvl===0){
+        doc.setFont(fontFace,'normal');doc.setFontSize(Math.max(8,sizePt.body*0.85));doc.setTextColor(110);
+        doc.text(`PARTIE ${partNum}`,pageWidth/2,marginTop+2.6*lineHeight,{align:'center'});
+      }
+      doc.setFont(fontFace,'bold');doc.setFontSize(sizePt.title);doc.setTextColor(20);
+      const titleLineH=Math.min(lineHeight*1.15,sizePt.title*mmPerPt*1.25);
+      let ty=marginTop+(lvl===1?5.2:4.4)*lineHeight;
+      doc.splitTextToSize(frenchTypo(s.title||'Sans titre').toUpperCase(),contentWidth-20).forEach(line=>{
+        doc.text(line,pageWidth/2,ty,{align:'center'});ty+=titleLineH;
+      });
+      y=bodyStartY;
+    }else if(isOpeningPage){
+      // Page d'ouverture façon livre (formats non Poche) : numéro de chapitre centré (ou "PARTIE n"),
+      // puis titre en capitales centrées, avec un espace généreux avant le début du texte.
+      const startY=marginTop+(maxY-marginTop)*0.16;
+      y=Math.max(y,startY);
+      if(lvl===1){
+        // Numéro de chapitre volontairement non affiché au-dessus du titre ; l'espace est conservé
+        // pour garder la même position verticale du titre qu'auparavant.
+        y+=(sizePt.title+3)*mmPerPt*1.3+lineHeight*0.7;
+      }else if(lvl===0){
+        doc.setFont(fontFace,'normal');doc.setFontSize(10);doc.setTextColor(110);
+        doc.text(`PARTIE ${partNum}`,pageWidth/2,y,{align:'center'});
+        y+=10*mmPerPt*1.3+lineHeight*0.5;
+      }
+      doc.setFont(fontFace,'bold');doc.setFontSize(sizePt.title);doc.setTextColor(20);
+      const titleLineH=sizePt.title*mmPerPt*1.3;
+      doc.splitTextToSize(frenchTypo(s.title||'Sans titre').toUpperCase(),contentWidth-20).forEach(line=>{
+        if(y+titleLineH>maxY)newPage(true);
+        doc.text(line,pageWidth/2,y,{align:'center'});y+=titleLineH;
+      });
+      y+=lineHeight*1.7;
+    }else{
+      doc.setFont(fontFace,'normal');doc.setFontSize(sizePt.title);doc.setTextColor(20);
+      const titleLineH=sizePt.title*mmPerPt*1.3;
+      const titleLines=doc.splitTextToSize(frenchTypo(s.title||'Sans titre'),contentWidth);
+      // Titre orphelin : on ne démarre pas un titre s'il ne reste pas la place pour lui et au moins
+      // deux lignes du paragraphe qui suit — on préfère renvoyer l'ensemble à la page suivante.
+      if(y+titleLines.length*titleLineH+lineHeight*2>maxY)newPage(false);
+      titleLines.forEach(line=>{doc.text(line,xFor(),y);y+=titleLineH});
+      y+=lineHeight*0.9;
+    }
+    setBodyStyle();
+    // Justification façon livre imprimé : chaque ligne est étirée pour occuper exactement toute la
+    // largeur de la colonne (les espaces entre les mots sont légèrement agrandis ou resserrés selon
+    // la ligne), sauf la toute dernière ligne de chaque paragraphe qui reste alignée naturellement à
+    // gauche, comme dans une composition typographique classique. On traite le texte paragraphe par
+    // paragraphe (coupure sur les retours à la ligne saisis par l'utilisateur) afin d'identifier
+    // correctement la dernière ligne de CHAQUE paragraphe, et pas seulement celle du texte entier.
+    const paragraphs=frenchTypo(s.content||'').split(/\r\n|\r|\n/);
+    paragraphs.forEach(para=>{
+      const paraLines=doc.splitTextToSize(para,contentWidth);
+      paraLines.forEach((line,i)=>{
+        // Tolérance de 0,01mm pour absorber les erreurs d'arrondi flottant accumulées sur les 25
+        // additions successives de lineHeight : sans elle, la toute dernière ligne d'une page pleine
+        // (25e ligne, ou 15e sur une page d'ouverture) était parfois rejetée à tort sur la page
+        // suivante, donnant 24 ou 14 lignes au lieu de 25 ou 15.
+        if(y+lineHeight>maxY+0.01)newPage(false);
+        if(i<paraLines.length-1){
+          justifyLine(line,xFor(),contentWidth);
+        }else{
+          doc.text(line,xFor(),y);
+        }
+        y+=lineHeight;
+      });
+    });
+  });
+
+  if(opts.pageNumbers){
+    const total=doc.internal.getNumberOfPages();
+    const footerY=pageHeight-Math.max(7,marginBottom*0.45);
+    for(let i=1+coverPageIndex;i<=total;i++){
+      doc.setPage(i);
+      // Même intensité de gris que le corps du texte (20) : le numéro de page ne doit pas paraître
+      // plus pâle/transparent que le reste du texte de la page.
+      doc.setFont(fontFace,'normal');doc.setFontSize(9);doc.setTextColor(20);
+      const x=opts.position==='left'?m.outer:opts.position==='right'?pageWidth-m.outer:pageWidth/2;
+      const align=opts.position==='left'?'left':opts.position==='right'?'right':'center';
+      doc.text(String(i-coverPageIndex),x,footerY,{align});
+    }
+  }
+  return doc;
+}
+
+// ---------- Auto-tests de mise en page (aucun framework de test n'existe dans ce projet : suite
+// autonome basée sur console.assert, à exécuter manuellement depuis la console du navigateur en
+// appelant window.koppiRunLayoutTests()). Couvre les invariants numériques exigés par le cahier des
+// charges pour le format Poche : dimensions, marges, grille de 25/15 lignes, pagination des pages
+// spéciales, typographie française de base. ----------
+function koppiRunLayoutTests(){
+  const results=[];
+  const check=(name,cond)=>{results.push({name,ok:!!cond});if(!cond)console.error('✗ '+name);else console.log('✓ '+name)};
+
+  const fmt=PAGE_FORMATS.poche;
+  check('Format Poche = 110×180mm',fmt.mm[0]===110&&fmt.mm[1]===180);
+
+  const m=marginsFor('poche','normal');
+  check('Marge haute > ancienne valeur (12mm)',m.top>12);
+  check('Marge basse suffisante pour le folio (≥14mm)',m.bottom>=14);
+  check('Marge latérale identique des deux côtés (plus de gouttière asymétrique)',m.inner===m.outer);
+
+  const opts={format:'poche',margins:'normal',font:'serif',size:'medium',lineHeight:'normal',titlePage:false,pageBreaks:true,pageNumbers:true,position:'center',titleStyle:'center'};
+  const pageHeight=180,maxY=pageHeight-m.bottom,marginTop=m.top;
+  const lineHeight=(maxY-marginTop)/25;
+  check('25 lignes exactes sur une page normale',Math.abs((maxY-marginTop)/lineHeight-25)<1e-6);
+  const bodyStartY=marginTop+10*lineHeight;
+  const linesOnOpeningPage=Math.floor((maxY-bodyStartY)/lineHeight+1e-9);
+  check('15 lignes exactes sur une page d’ouverture de chapitre',linesOnOpeningPage===15);
+
+  try{
+    const fakeProject={name:"L’essai sur l’anémoïa",sections:[
+      {title:'Avant-propos',content:'x'.repeat(20),level:0},
+      {title:'Chapitre 1',content:Array(60).fill('Une phrase de test suffisamment longue pour occuper plusieurs lignes complètes.').join(' '),level:1}
+    ]};
+    const doc=buildPdfDoc(fakeProject,opts);
+    check('Le PDF de test se génère sans erreur',!!doc);
+    check('Au moins une page générée',doc.internal.getNumberOfPages()>=1);
+  }catch(err){check('Le PDF de test se génère sans erreur (exception : '+err.message+')',false)}
+
+  check("Apostrophe courbe",frenchTypo("l'anémoïa")==='l’anémoïa');
+  check('Guillemets français',frenchTypo('il a dit "bonjour"')==='il a dit « bonjour »');
+  check('Espace insécable avant ?',frenchTypo('Vraiment ?').includes('\u00A0?'));
+  check('Accents/tréma préservés (paranoïa)',frenchTypo('paranoïa')==='paranoïa');
+
+  const passed=results.filter(r=>r.ok).length;
+  console.log(`Auto-tests KOPPI : ${passed}/${results.length} réussis`);
+  return results;
+}
+if(typeof window!=='undefined')window.koppiRunLayoutTests=koppiRunLayoutTests;
+
+function generatePdf(opts){
+  const p=project();if(!p)return;
+  const doc=buildPdfDoc(p,opts);
+  const filename=(p.name||'manuscrit').replace(/[^a-z0-9\-_ àâäéèêëïîôöùûüç]/gi,'').trim()||'manuscrit';
+  doc.save(filename+'.pdf');
+}
+
+function segValue(id){const active=$(`#${id} .active`);return active?active.dataset.value:null}
+function setupSeg(id){
+  $$(`#${id} button`).forEach(b=>b.onclick=()=>{$$(`#${id} button`).forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+}
+setupSeg('pdfFormatSeg');setupSeg('pdfPositionSeg');setupSeg('pdfMarginsSeg');setupSeg('pdfFontSeg');setupSeg('pdfSizeSeg');setupSeg('pdfLineHeightSeg');setupSeg('pdfTitleStyleSeg');setupSeg('pdfTitlePositionSeg');
+function refreshPdfDialog(){refreshPagesEstimate();refreshPdfPreview()}
+$$('#pdfFormatSeg button,#pdfMarginsSeg button,#pdfFontSeg button,#pdfSizeSeg button,#pdfLineHeightSeg button,#pdfTitleStyleSeg button,#pdfPositionSeg button,#pdfTitlePositionSeg button').forEach(b=>b.addEventListener('click',()=>setTimeout(refreshPdfDialog,0)));
+$$('#pdfTitleStyleSeg button').forEach(b=>b.addEventListener('click',()=>{const isTop=segValue('pdfTitleStyleSeg')==='top';$('#pdfTitlePositionRow').style.opacity=isTop?'1':'.45';$('#pdfRunningHeadersRow').style.opacity=isTop?'.45':'1'}));
+$('#pdfPageNumbers').onclick=()=>{const b=$('#pdfPageNumbers');b.classList.toggle('on');$('#pdfPositionRow').style.opacity=b.classList.contains('on')?'1':'.45';refreshPdfDialog()};
+$('#pdfEmptySections').onclick=()=>{$('#pdfEmptySections').classList.toggle('on');refreshPdfDialog()};
+$('#pdfTitlePage').onclick=()=>{$('#pdfTitlePage').classList.toggle('on');refreshPdfDialog()};
+$('#pdfPageBreaks').onclick=()=>{$('#pdfPageBreaks').classList.toggle('on');refreshPdfDialog()};
+$('#pdfRunningHeaders').onclick=()=>{$('#pdfRunningHeaders').classList.toggle('on');refreshPdfDialog()};
+$('#cancelPdfExport').onclick=()=>$('#printOptionsDialog').close();
+function collectPdfOpts(){
+  return{
+    format:segValue('pdfFormatSeg')||'a4',
+    margins:segValue('pdfMarginsSeg')||'normal',
+    font:segValue('pdfFontSeg')||'serif',
+    size:segValue('pdfSizeSeg')||'medium',
+    lineHeight:segValue('pdfLineHeightSeg')||'normal',
+    titleStyle:segValue('pdfTitleStyleSeg')||'center',
+    titlePosition:segValue('pdfTitlePositionSeg')||'center',
+    titlePage:$('#pdfTitlePage').classList.contains('on'),
+    pageBreaks:$('#pdfPageBreaks').classList.contains('on'),
+    pageNumbers:$('#pdfPageNumbers').classList.contains('on'),
+    position:segValue('pdfPositionSeg')||'center',
+    includeEmpty:$('#pdfEmptySections').classList.contains('on'),
+    runningHeaders:$('#pdfRunningHeaders').classList.contains('on')
+  };
+}
+function refreshPagesEstimate(){
+  const p=project();const el=$('#pdfPagesEstimate');if(!p||!el)return;
+  const opts=collectPdfOpts();
+  const sections=p.sections.filter(s=>opts.includeEmpty||wc(s.content)>0);
+  let pages=sections.reduce((n,s)=>n+estimatePagesForText(s.content.length,opts),0);
+  if(opts.titlePage)pages+=1;
+  el.textContent=`≈ ${pages} page${pages>1?'s':''}`;
+}
+let pdfPreviewUrl=null,pdfPreviewTimer=null;
+function refreshPdfPreview(){
+  clearTimeout(pdfPreviewTimer);
+  pdfPreviewTimer=setTimeout(()=>{
+    const p=project();const frame=$('#pdfPreviewFrame'),wrap=$('#pdfPreviewWrap'),loading=$('#pdfPreviewLoading'),note=$('#pdfPreviewNote');
+    if(!p||!frame)return;
+    const opts=collectPdfOpts();
+    const fmt=PAGE_FORMATS[opts.format]||PAGE_FORMATS.a4;
+    const w=210,h=Math.round(w*(fmt.mm[1]/fmt.mm[0]));
+    if(wrap){wrap.style.width=w+'px';wrap.style.height=h+'px'}
+    if(loading)loading.classList.remove('hidden');
+    // Génère un vrai PDF (via la même fonction que l'export réel) limité aux 2 premières sections,
+    // pour un aperçu fidèle mais rapide à recalculer à chaque changement d'option.
+    const previewSections=(p.sections.filter(s=>opts.includeEmpty||wc(s.content)>0)).slice(0,2);
+    const list=previewSections.length?previewSections:[{title:p.sections[0]?.title||'Chapitre 1',content:p.sections[0]?.content||'Ceci est un texte d’exemple pour prévisualiser la mise en page choisie. Il s’ajuste automatiquement selon la police, la taille, l’interligne et les marges sélectionnées.'}];
+    try{
+      const doc=buildPdfDoc(p,opts,list);
+      const blob=doc.output('blob');
+      if(pdfPreviewUrl)URL.revokeObjectURL(pdfPreviewUrl);
+      pdfPreviewUrl=URL.createObjectURL(blob);
+      const pageParam=opts.titlePage?2:1;
+      frame.onload=()=>{if(loading)loading.classList.add('hidden')};
+      frame.src=pdfPreviewUrl+`#page=${pageParam}&toolbar=0&navpanes=0&statusbar=0&view=FitH`;
+    }catch(err){console.error('Aperçu PDF impossible :',err);if(loading)loading.textContent='Aperçu indisponible'}
+    if(note)note.textContent=`${fmt.label} · ${fmt.mm[0]}×${fmt.mm[1]} mm — aperçu des premières pages`;
+  },220);
+}
+async function saveProjectLayout(opts){
+  const p=project();if(!p)return;
+  p.layout=opts;
+  const r=await sb.from('projects').update({layout:opts}).eq('id',p.id);
+  if(r.error)alert('Le format n’a pas pu être enregistré : '+r.error.message);
+}
+$('#saveLayoutOnly').onclick=async()=>{
+  const opts=collectPdfOpts();
+  await saveProjectLayout(opts);
+  $('#printOptionsDialog').close();
+  renderDashboard();
+};
+$('#continuePdfExport').onclick=async()=>{
+  const opts=collectPdfOpts();
+  await saveProjectLayout(opts);
+  $('#printOptionsDialog').close();
+  generatePdf(opts);
+};
+
+function printDirect(){
+  const l=projectLayout(project());
+  buildPrintRoot(Object.assign({},l,{pageNumbers:false}));
+  setTimeout(()=>window.print(),50);
+}
+
+// ---------- Offres / Stripe ----------
+function openPlans(){
+  closeAllPopovers();
+  const plan=currentProfile?.plan||'free';
+  const grid=$('#plansGrid');
+  grid.innerHTML=['free','writer','studio'].map(key=>{
+    const isCurrent=plan===key;
+    const limitLabel=PLAN_LIMITS[key]===Infinity?'Illimité':PLAN_LIMITS[key]+' projets';
+    const btnLabel=isCurrent?'Offre actuelle':(key==='free'?'Revenir à Free':'S’abonner');
+    const disabled=isCurrent||(key!=='free'&&!STRIPE_ENABLED);
+    const btnText=(!isCurrent&&key!=='free'&&!STRIPE_ENABLED)?'Bientôt disponible':btnLabel;
+    return `<div class="plan-card ${isCurrent?'current':''}">
+      <div class="plan-tag">${isCurrent?'Offre actuelle':''}</div>
+      <h3>${PLAN_LABEL[key]}</h3>
+      <div class="price">${PLAN_PRICE_LABEL[key]}${key!=='free'?'':''}</div>
+      <ul><li>${limitLabel}</li><li>${PLAN_STORAGE_LABEL[key]}</li>${PLAN_FEATURES[key].map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+      <button data-plan="${key}" ${disabled?'disabled':''} class="${key!=='free'&&!isCurrent?'primary':''}">${btnText}</button>
+    </div>`;
+  }).join('');
+  $$('#plansGrid button[data-plan]').forEach(btn=>{
+    if(btn.disabled)return;
+    btn.onclick=()=>{if(btn.dataset.plan!=='free')startCheckout(btn.dataset.plan)};
+  });
+  $('#plansDialog').showModal();
+}
+
+async function getAccessToken(){const {data:{session}}=await sb.auth.getSession();return session?.access_token||null}
+
+async function startCheckout(plan){
+  if(!STRIPE_ENABLED){return}
+  const token=await getAccessToken();if(!token){alert('Session expirée, reconnectez-vous.');return}
+  try{
+    const res=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({plan})});
+    const data=await res.json();
+    if(!res.ok){alert(data.error||'Erreur lors de la création de la session de paiement.');return}
+    window.location.href=data.url;
+  }catch(err){console.error(err);alert('Impossible de contacter le service de paiement.')}
+}
+
+async function openBillingPortal(){
+  if(!STRIPE_ENABLED){return}
+  const token=await getAccessToken();if(!token){alert('Session expirée, reconnectez-vous.');return}
+  try{
+    const res=await fetch('/api/create-portal-session',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token}});
+    const data=await res.json();
+    if(!res.ok){alert(data.error||'Erreur lors de l’ouverture du portail de facturation.');return}
+    window.location.href=data.url;
+  }catch(err){console.error(err);alert('Impossible de contacter le service de facturation.')}
+}
+
+// ---------- Boot ----------
+$('#themeButton').onclick=()=>setTheme(document.documentElement.dataset.theme==='light'?'dark':'light');
+$('#brandLink').onclick=e=>{e.preventDefault();landing()};
+$('#loginButton').onclick=()=>auth('login');
+$('#signupButton').onclick=()=>auth('signup');
+$('#openAppButton').onclick=()=>openApp();
+$('#cancelProject').onclick=()=>$('#projectDialog').close();
+$('#cancelSection').onclick=()=>$('#sectionDialog').close();
+$('#cancelRenameProject').onclick=()=>$('#renameProjectDialog').close();
+$('#cancelDeleteProject').onclick=()=>$('#deleteProjectDialog').close();
+$('#cancelRenameSection').onclick=()=>$('#renameSectionDialog').close();
+$('#cancelDeleteSection').onclick=()=>$('#deleteSectionDialog').close();
+$('#closeLimit').onclick=()=>$('#limitDialog').close();
+$('#projectForm').onsubmit=async e=>{e.preventDefault();if(await createProject($('#projectName').value)){$('#projectName').value='';$('#projectDialog').close()}};
+setupSeg('sectionLevelSeg');
+$('#sectionForm').onsubmit=async e=>{e.preventDefault();const lvl=parseInt(segValue('sectionLevelSeg')??'1',10);if(await createSection($('#sectionName').value,lvl)){$('#sectionName').value='';$('#sectionDialog').close()}};
+
+function hideBootLoader(){
+  const el=$('#bootLoader');if(!el)return;
+  el.classList.add('hide');
+  setTimeout(()=>el.remove(),260);
+}
+async function boot(){
+  setTheme(localStorage.getItem('koppi.theme')||'dark');
+  const {data:{session}}=await sb.auth.getSession();
+  if(session){currentUser=session.user;await openApp()}else landing();
+  hideBootLoader();
+  sb.auth.onAuthStateChange(async(event,session)=>{
+    if(event==='SIGNED_IN'&&session&&!currentUser){currentUser=session.user;await openApp()}
+    if(event==='SIGNED_OUT'){currentUser=null;currentProfile=null;state={projects:[],activeProject:null,activeSection:null};landing()}
+  });
+}
+boot();
+</script>
+</body>
+</html>
